@@ -1,0 +1,64 @@
+% Electrophysiology Model Simulator
+%
+%
+%                Jesus Carro Fernandez 2012/07/20
+%
+
+function Y0=ElectrophysiologyModelSimulator(configuration,database)
+
+%addpath('models')
+
+disp(' ')
+tic
+
+switch nargin
+    case 0
+        error('It''s necesary a configuration for the simulation')
+    case 1
+        if(ischar(configuration))
+            configuration=load(configuration);
+        end
+        database = 'default.mat';
+    otherwise
+        if(ischar(configuration))
+            configuration=load(configuration);
+        end
+end
+
+model = configuration.Model;
+
+if(isstruct(database))
+    implementedModels = database;
+else
+    implementedModels = load(database);
+end
+
+if(ischar(model))
+  if(~isfield(implementedModels,model))
+      disp('Unknow model')
+      return;
+  end
+  model = implementedModels.(model);
+end
+
+disp(['Model: ' model.Name])
+
+%options = odeset('RelTol',1e-12);
+%options = odeset('RelTol',1e-12,'MStateDependence','strong','BDF','on','MaxStep',1);
+options = odeset('RelTol',1e-12,'MaxStep',1);
+
+if(ischar(configuration.Stimulation))
+    Y0 = RunSimulationChar(configuration,model,options);
+else if(iscell(configuration.Stimulation))
+    Y0 = RunSimulationCell(configuration,model,options);
+    else
+        Y0 = RunSimulationNoCell(configuration,model,options);
+    end
+end
+
+
+% ¡¡¡¡ Important !!!! It's necessary to implement the calibration system.
+
+toc
+disp(' ')
+disp(' ')

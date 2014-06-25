@@ -1,0 +1,43 @@
+|==============================================================================|
+|                                 MODIFICATIONS                                |
+|------------------------------------------------------------------------------|
+|                                                    Last revision: 29/07/2013 |
+|==============================================================================|
+
+=== v01.00 ===
+
+26/07/2013
+
+* Models folder created to separate program and models
+* CreateDefaultModelStructure.m modified to get models from its directory.
+* CreateModel.m modified to permit get and save models from subdirectories.
+* CreateModelStructure.m modified to add Computed Variables names and units.
+* CreateModel.m modified to return Computed Variable.
+
+
+28/07/2013
+
+* Modified CreateConfiguration*.m files to add computed variables to save.
+* Removed CreateConfiguration4Markers.m. This file is no longer used.
+* Modified RunSimulationsChar to indicate the protocol that is not implemented. 
+
+
+29/07/2013
+
+* Modified ElectrophysiologyModelSimulator.m to add models to path.
+* Modified RunSimulationSteadyState.m to save Computed Variables.
+* Modified CreateModelStructure.m to add Computed Variable number to the 
+structure.
+* Grandi et al. stimulation modified to be twice the diastolic threshold in 
+amplitude and 1-ms duration (38.2).
+* O'Hara et al. EPI stimulation modified to be twice the diastolic threshold in 
+amplitude and 1-ms duration (-60.8).
+* Y0, YNames and YUnits changed for SV0, SVNames, SVUnits (State Variables).
+
+
+01/08/2013
+
+* Modified ElectrophysiologyModelSimulator.m to permit configurations with 
+model structure.
+* Modified CreateModelStructure.m to fix a bug with the extension in the 
+output file.

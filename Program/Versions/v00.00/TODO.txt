@@ -1,0 +1,12 @@
+|=================================================================================|
+|                                 THINGS TO DO                                    |
+|---------------------------------------------------------------------------------|
+|                                                       Last revision: 2014/04/17 |
+|=================================================================================|
+
+
+* Calibration system 
+* Possibility to save computed variables:
+  - Modify from RunSimulation*
+* Modify Grandi model to use the same stimulation as in TT and in CRLP
+* Maximum step in configuration

@@ -1,22 +1,6 @@
 function SV0=RunSimulationAPDRateAdaptation(configuration,model,options)
 
-if(length(configuration.sv_save)<1)
-    sv_save = [];
-else
-    sv_save = zeros(length(configuration.sv_save),1);
-    for j=1:length(configuration.sv_save)
-        sv_save(j)=find(strcmp(model.SVNames,configuration.sv_save{j}),1);
-    end
-end
-
-if(length(configuration.var2biomarker)<1)
-    var2biomarker = [];
-else
-    var2biomarker = zeros(length(configuration.var2biomarker),1);
-    for j=1:length(configuration.var2biomarker)
-         var2biomarker(j)=find(strcmp(model.SVNames,configuration.var2biomarker{j}),1);
-    end
-end
+[sv_save,cv_save,var2biomarker] = getIndexToSave(configuration,model);
 
 apd90_sv = var2biomarker;
 

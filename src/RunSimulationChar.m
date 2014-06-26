@@ -18,5 +18,5 @@ if(strcmp(configuration.Stimulation,'APDRateAdaptation'))
     return;
 end
 
-disp(['Protocol ' configuration.Stimulation ' not implemented yet.:wq'])
+disp(['Protocol ' configuration.Stimulation ' not implemented yet.'])
 SV0=[];

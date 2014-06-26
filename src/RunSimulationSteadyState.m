@@ -42,7 +42,7 @@ for i=1:nCLs
     steps = length(t);
     disp(['Stimulation ' num2str(i) ': ' num2str(tini) 'ms to ' num2str(t(end)+tini) 'ms'])
     [T,Y]=ode15s(mf,t,SV0,options,configuration.Constants,configuration.Values);
-
+    
     SV0=Y(end,:);
     pos = find(tini==time{1});
     if(~isempty(pos))

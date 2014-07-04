@@ -6,12 +6,24 @@
 %                                       2014/07/04
 %
 %==================================================
+
+addpath('../src/')
  
 % test = struct('function',@function,'name',name,...
 %               'expectedValue',value);
 % tests[end+1]=test;
 
 tests = [];
+
+test = struct('function',@testCreateConfig001,...
+	      'name','Create basic configuration',...
+              'expectedValue',true);
+tests[end+1]=test;
+
+
+
+
+
 results = false(size(tests));
 
 numTests = length(tests);

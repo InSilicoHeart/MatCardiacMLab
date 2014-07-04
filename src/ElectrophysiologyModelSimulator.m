@@ -56,9 +56,6 @@ else if(iscell(configuration.Stimulation))
     end
 end
 
-
-% ¡¡¡¡ Important !!!! It's necessary to implement the calibration system.
-
 toc
 disp(' ')
 disp(' ')

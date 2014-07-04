@@ -6,8 +6,8 @@
 %-----------------------------------------------------------------------
 %
 %    CreateConfiguration(Model,Constants,Values,DT,...
-%                        Stimulation,Time,sv_save,Output,...
-%                        Calibration,WriteDefault [,ConfigFile])
+%                        Stimulation,Time,sv_save,cv_save,...
+%                        Output[,ConfigFile])
 %
 %    Input:
 %      Model: Model's name in the data base that is going to be used.
@@ -30,7 +30,7 @@
 %=======================================================================
 
 function config = CreateConfiguration(Model,Constants,Values,DT,...
-    Stimulation,Time,sv_save,cv_save,Output,Calibration,WriteDefault,varargin)
+    Stimulation,Time,sv_save,cv_save,Output,varargin)
 
 config.Model = Model;
 config.Constants = Constants;
@@ -41,8 +41,6 @@ config.Time = Time;
 config.Output = Output;
 config.sv_save = sv_save;
 config.cv_save = cv_save;
-config.Calibration = Calibration;
-config.WriteDefault = WriteDefault;
 
 if (length(varargin)>0)
   save(varargin{1},'-struct','config');

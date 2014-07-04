@@ -1,4 +1,4 @@
-function [result,msg] = testCreateConfig001()
+function [result,msg] = testCreateConfig003()
 
 Model = 'Carro2011EPI';
 Constants = {};
@@ -6,11 +6,11 @@ Values = [];
 DT = 0.1;
 Stimulation = [0:1000:9000];
 Time = 10000;
-sv_save = {};
-cv_save = {};
+sv_save = {'V'};
+cv_save = {'I_K_tot'};
 path_save = ['testResults'];
-Output = ['testCreateConfig001_res.mat'];
-ConfigFile = ['testCreateConfig001_conf.mat'];
+Output = ['testCreateConfig003_res.mat'];
+ConfigFile = ['testCreateConfig003_conf.mat'];
 
 delete([path_save '/' ConfigFile]);
 

@@ -18,12 +18,16 @@ else
     end
 end
 
-if(length(configuration.var2biomarker)<1)
-    var2biomarker = [];
-else
-    var2biomarker = zeros(length(configuration.var2biomarker),1);
-    for j=1:length(configuration.var2biomarker)
-         var2biomarker(j)=find(strcmp(model.SVNames,configuration.var2biomarker{j}),1);
-    end
-end
 
+if(isfield(configuration,'var2biomarker'))
+  if(length(configuration.var2biomarker)<1)
+      var2biomarker = [];
+  else
+      var2biomarker = zeros(length(configuration.var2biomarker),1);
+      for j=1:length(configuration.var2biomarker)
+           var2biomarker(j)=find(strcmp(model.SVNames,configuration.var2biomarker{j}),1);
+      end
+  end
+else
+  var2biomarker = [];
+end

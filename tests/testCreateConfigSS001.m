@@ -1,24 +1,26 @@
-function [result,msg] = testCreateConfig001()
+function [result,msg] = testCreateConfigSS001()
 
 Model = 'Carro2011EPI';
 Constants = {};
 Values = [];
 DT = 0.1;
-Stimulation = [0:1000:9000];
-Time = 10000;
+CL = 1000;
+nCLs = 10;
+nCLs_save = 1;
 sv_save = {};
 cv_save = {};
+biomarkers = {};
+var2biomarker = {};
 path_save = ['testResults'];
-Output = ['testCreateConfig001_res.mat'];
-ConfigFile = ['testCreateConfig001_conf.mat'];
+Output = ['testCreateConfigSS001_res.mat'];
+ConfigFile = ['testCreateConfigSS001_conf.mat'];
 
 delete([path_save '/' ConfigFile]);
 
 try
-  config = CreateConfiguration(Model,Constants,Values,DT,...
-                        Stimulation,Time,sv_save,cv_save,...
-                        [path_save '/' Output], ...
-                        [path_save '/' ConfigFile]);
+  config = CreateConfigurationSteadyState(Model,Constants,Values,DT,...
+    CL,nCLs,sv_save,cv_save,nCLs_save,biomarkers,var2biomarker,...
+    [path_save '/' Output],[path_save '/' ConfigFile]);
 
   file = dir(path_save);
   result = false;

@@ -1,8 +1,8 @@
-function [result,msg] = testRunSimulation001()
+function [result,msg] = testRunSimulation002()
 
 path_save = 'testResults';
-Output = ['testCreateConfig001_res.mat'];
-ConfigFile = ['testCreateConfig001_conf.mat'];
+Output = ['testCreateConfig002_res.mat'];
+ConfigFile = ['testCreateConfig002_conf.mat'];
 
 delete([path_save '/' Output]);
 

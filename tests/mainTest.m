@@ -24,7 +24,7 @@ for i=1:numTests
     resultStr = 'Ok';
   else
     resultStr = 'Bad';
-
+  end
   disp(['   - Result: ' resultStr ' - Message: ' msg])
 end
 

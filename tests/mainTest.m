@@ -17,18 +17,18 @@ results = false(size(tests));
 numTests = length(tests);
 
 for i=1:numTests
-  disp(['Test: ' test[i].name '...'])
-  [result,msg]=tests[i].function();
-  results(i) = test[i].expectedValue==result;
+  disp(['Test: ' test(i).name '...'])
+  [result,msg]=tests(i).function();
+  results(i) = test(i).expectedValue==result;
   if(result(i))
     resultStr = 'Ok';
   else
     resultStr = 'Bad';
-
+  end
   disp(['   - Result: ' resultStr ' - Message: ' msg])
 end
 
 okTests = length(find(results));
-badTests = numTests-badTests;
+badTests = numTests-okTests;
 
 disp(['Tests: ' num2str(numTests) ', Ok: ' num2str(okTests) ', Bad: ' num2str(badTests)])

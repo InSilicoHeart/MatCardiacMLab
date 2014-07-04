@@ -46,7 +46,7 @@ for i=1:nCLs
     SV0=Y(end,:);
     pos = find(tini==time{1});
     if(~isempty(pos))
-        SV{1}.result(pos:pos+length(t)-1,:)=Y(:,sv_save);
+        SV{1}.result(pos:pos+steps-1,:)=Y(:,sv_save);
     end
 
     % Calculation of biomarkers
@@ -66,10 +66,10 @@ for i=1:nCLs
     if(length(cv_save)>0)
         pos = find(tini==time{1});
         if(~isempty(pos))
-            for j=1:length(t)
+            for j=1:steps
                 [dY,ComVar(j,:)] = mf(T(j),Y(j,:),configuration.Constants,configuration.Values);
             end
-            CV{1}.result(pos:pos+length(t)-1,:)=ComVar(:,cv_save);
+            CV{1}.result(pos:pos+steps-1,:)=ComVar(:,cv_save);
         end
     end
 

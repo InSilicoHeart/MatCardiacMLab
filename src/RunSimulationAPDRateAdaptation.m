@@ -15,10 +15,11 @@ apd90 = zeros(nCLs1+nCLs2,length(apd90_sv));
 
 SV0 = model.SV0;
 mf = model.mf;
-results = cell(size(configuration));
-result_names = cell(size(configuration));
-result_units = cell(size(configuration));
-time = cell(size(configuration));
+
+% Cells to save results
+SV = cell(1);
+CV = cell(1);
+time = cell(1);
 
 tini = 0;
 tfin = nCLs1*CL1+nCLs2*CL2;
@@ -29,7 +30,7 @@ else
     time{1}=(nCLs1+nCLs2-nCLs_save)*CL1:dt:tfin;
 end
 
-results{1}=zeros(length(time{1}),length(sv_save));
+SV{1}.result=zeros(length(time{1}),length(sv_save));
 
 
 % Runing the first part
@@ -45,7 +46,7 @@ for i=1:nCLs1
     SV0=Y(end,:);
     pos = find(tini==time{1});
     if(~isempty(pos))
-        results{1}(pos:pos+length(t)-1,:)=Y(:,sv_save);
+        SV{1}.result(pos:pos+steps-1,:)=Y(:,sv_save);
     end
 
     % Calculation of the biomarkers
@@ -53,6 +54,18 @@ for i=1:nCLs1
     apd90_val=Y(:,apd90_sv);
     
     apd90(i,:) = CalculateAPD90(apd90_val,t');
+
+    % Evaluate Computed Variables
+    ComVar = zeros(length(T),model.CVnum);
+    if(length(cv_save)>0)
+        pos = find(tini==time{1});
+        if(~isempty(pos))
+            for j=1:steps
+                [dY,ComVar(j,:)] = mf(T(j),Y(j,:),configuration.Constants,configuration.Values);
+            end
+            CV{1}.result(pos:pos+steps-1,:)=ComVar(:,cv_save);
+        end
+    end
 
     tini = t(end)+tini;
     tfin = (i+1)*CL1;
@@ -70,7 +83,7 @@ for i=1:nCLs2
     SV0=Y(end,:);
     pos = find(tini==time{1});
     if(~isempty(pos))
-        results{1}(pos:pos+length(t)-1,:)=Y(:,sv_save);
+        SV{1}.result(pos:pos+steps-1,:)=Y(:,sv_save);
     end
     
     % Calculation of the biomarkers
@@ -78,7 +91,19 @@ for i=1:nCLs2
     apd90_val=Y(:,apd90_sv);
     
     apd90(i+nCLs1,:) = CalculateAPD90(apd90_val,t');
-                                
+   
+    % Evaluate Computed Variables
+    ComVar = zeros(length(T),model.CVnum);
+    if(length(cv_save)>0)
+        pos = find(tini==time{1});
+        if(~isempty(pos))
+            for j=1:steps
+                [dY,ComVar(j,:)] = mf(T(j),Y(j,:),configuration.Constants,configuration.Values);
+            end
+            CV{1}.result(pos:pos+steps-1,:)=ComVar(:,cv_save);
+        end
+    end
+                             
     tini = t(end)+tini;
     tfin = (i+1)*CL2+nCLs1*CL1;
 end
@@ -107,13 +132,22 @@ x = fmincon(@fitter_exp,x0,[],[],[],[],...
 
 tau_slow = x(2);
 
-result_names{1} = model.SVNames(sv_save);
-result_units{1} = model.SVUnits(sv_save);
+SV{1}.resultNames = model.SVNames(sv_save);
+SV{1}.resultUnits = model.SVUnits(sv_save);
 
-APD90{1}.results = apd90;
-APD90{1}.results_names = model.SVNames(apd90_sv);
+CV{1}.resultNames = model.CVNames(cv_save);
+CV{1}.resultUnits = model.CVUnits(cv_save);
 
-tauSlow{1}.results = tau_slow;
-tauSlow{1}.results_names = model.SVNames(apd90_sv);
+APD90{1}.result = apd90;
+APD90{1}.resultNames = model.SVNames(apd90_sv);
+for i=1:length(apd90_sv)
+  APD90{1}.resultUnits(i) = 'ms';
+end
 
-save(configuration.Output,'time','results','result_names','result_units','APD90','tauSlow')
+tauSlow{1}.result = tau_slow;
+tauSlow{1}.resultNames = model.SVNames(apd90_sv);
+for i=1:length(apd90_sv)
+  tauSlow{1}.resultUnits(i) = 's';
+end
+
+save(configuration.Output,'time','SV','CV','APD90','tauSlow')

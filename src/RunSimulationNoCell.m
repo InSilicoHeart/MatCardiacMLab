@@ -1,21 +1,15 @@
 function SV0=RunSimulationNoCell(configuration,model,options)
 
-if(length(configuration.sv_save)<1)
-    sv_save = [];
-else
-    sv_save = zeros(length(configuration.sv_save),1);
-    for j=1:length(configuration.sv_save)
-        sv_save(j)=find(strcmp(model.SVNames,configuration.sv_save{j}),1);
-    end
-end
+[sv_save,cv_save,var2biomarker] = getIndexToSave(configuration,model);
 
-
+% Model information
 SV0 = model.SV0;
 mf = model.mf;
-results = cell(size(configuration));
-result_names = cell(size(configuration));
-result_units = cell(size(configuration));
-time = cell(size(configuration));
+
+% Cells to save results
+SV = cell(1);
+CV = cell(1);
+time = cell(1);
 
 dt=configuration.DT;
 
@@ -37,7 +31,9 @@ end
 
 time{1}=tini:dt:configuration.Time;
 
-results{1}=zeros(length(time{1}),length(sv_save));
+SV{1}.result=zeros(length(time{1}),length(sv_save));
+CV{1}.result=zeros(length(time{1}),length(cv_save));
+
 
 while (tini<configuration.Time)       
     t=(tini:dt:tfin)-tini;
@@ -48,7 +44,25 @@ while (tini<configuration.Time)
     numstim = numstim + 1;
 
     SV0=Y(end,:);
-    results{1}(previousSteps+1:previousSteps+steps,:)=Y(:,sv_save);
+
+    pos = find(tini==time{1});
+    if(~isempty(pos))
+        SV{1}.result(pos:pos+steps-1,:)=Y(:,sv_save);
+    end
+
+
+    % Evaluate Computed Variables
+    ComVar = zeros(length(T),model.CVnum);
+    if(length(cv_save)>0)
+        pos = find(tini==time{1});
+        if(~isempty(pos))
+            for j=1:steps
+                [dY,ComVar(j,:)] = mf(T(j),Y(j,:),configuration.Constants,configuration.Values);
+            end
+            CV{1}.result(pos:pos+steps-1,:)=ComVar(:,cv_save);
+        end
+    end
+
 
     previousSteps = previousSteps+steps-1;
 
@@ -69,8 +83,11 @@ while (tini<configuration.Time)
     end
 end
 
-result_names{1} = model.SVNames(sv_save);
-result_units{1} = model.SVUnits(sv_save);
+SV{1}.resultNames = model.SVNames(sv_save);
+SV{1}.resultUnits = model.SVUnits(sv_save);
+
+CV{1}.resultNames = model.CVNames(cv_save);
+CV{1}.resultUnits = model.CVUnits(cv_save);
 
 
-save(configuration.Output,'time','results','result_names','result_units')
+save(configuration.Output,'time','SV','CV')

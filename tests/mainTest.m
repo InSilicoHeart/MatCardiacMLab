@@ -7,21 +7,33 @@
 %
 %==================================================
 
+clc;
+clear all;
+close all;
+
 addpath('../src/')
+
+
+disp('=================================================')
+disp('              EMS Simulator Test')
+disp('=================================================')
+disp(' ')
+disp(' ')
  
-% test = struct('function',@function,'name',name,...
+% test = struct('functionHandle',@function,'name',name,...
 %               'expectedValue',value);
-% tests[end+1]=test;
+% tests(end+1)=test;
 
-tests = [];
 
-test = struct('function',@testCreateConfig001,...
+test = struct('functionHandle',@testCreateConfig001,...
 	      'name','Create basic configuration',...
               'expectedValue',true);
-tests[end+1]=test;
+tests(1)=test;
 
-
-
+test = struct('functionHandle',@testRunSimulation001,...
+              'name','Run basic configuration',...
+              'expectedValue',true);
+tests(end+1)=test;
 
 
 results = false(size(tests));
@@ -29,10 +41,11 @@ results = false(size(tests));
 numTests = length(tests);
 
 for i=1:numTests
-  disp(['Test: ' test(i).name '...'])
-  [result,msg]=tests(i).function();
-  results(i) = test(i).expectedValue==result;
-  if(result(i))
+  disp([num2str(i) '/' num2str(numTests) ' Test: ' tests(i).name '...'])
+  functionHandle = tests(i).functionHandle;
+  [result,msg] = functionHandle();
+  results(i) = tests(i).expectedValue==result;
+  if(results(i))
     resultStr = 'Ok';
   else
     resultStr = 'Bad';
@@ -43,4 +56,5 @@ end
 okTests = length(find(results));
 badTests = numTests-okTests;
 
-disp(['Tests: ' num2str(numTests) ', Ok: ' num2str(okTests) ', Bad: ' num2str(badTests)])
+disp(' ')
+disp(['Tests: ' num2str(numTests) ', Ok: ' num2str(okTests) ', Bad: ' num2str(badTests) '.'])

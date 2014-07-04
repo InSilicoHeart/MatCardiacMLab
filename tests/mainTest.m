@@ -29,6 +29,6 @@ for i=1:numTests
 end
 
 okTests = length(find(results));
-badTests = numTests-badTests;
+badTests = numTests-okTests;
 
 disp(['Tests: ' num2str(numTests) ', Ok: ' num2str(okTests) ', Bad: ' num2str(badTests)])

@@ -17,9 +17,9 @@ results = false(size(tests));
 numTests = length(tests);
 
 for i=1:numTests
-  disp(['Test: ' test[i].name '...'])
-  [result,msg]=tests[i].function();
-  results(i) = test[i].expectedValue==result;
+  disp(['Test: ' test(i).name '...'])
+  [result,msg]=tests(i).function();
+  results(i) = test(i).expectedValue==result;
   if(result(i))
     resultStr = 'Ok';
   else

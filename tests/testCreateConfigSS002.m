@@ -1,8 +1,8 @@
-function [result,msg] = testCreateConfigSS001()
+function [result,msg] = testCreateConfigSS002()
 
 Model = 'Carro2011EPI';
-Constants = {};
-Values = [];
+Constants = {'A_NaK'};
+Values = [0.9];
 DT = 0.1;
 CL = 1000;
 nCLs = 10;
@@ -12,8 +12,8 @@ cv_save = {};
 biomarkers = {};
 var2biomarker = {};
 path_save = ['testResults'];
-Output = ['testCreateConfigSS001_res.mat'];
-ConfigFile = ['testCreateConfigSS001_conf.mat'];
+Output = ['testCreateConfigSS002_res.mat'];
+ConfigFile = ['testCreateConfigSS002_conf.mat'];
 
 if(checkIfFileExists(path_save,ConfigFile))
   delete([path_save '/' ConfigFile]);

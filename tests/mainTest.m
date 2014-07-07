@@ -22,7 +22,7 @@ disp(' ')
  
 %tests = struct('functionHandle',[],'name',{},'expectedValue',{});
 
-tests = [configurationTests() runTests()];
+tests = [configurationTests()];% runTests()];
 
 results = false(size(tests));
 

@@ -12,7 +12,9 @@ path_save = ['testResults'];
 Output = ['testCreateConfig001_res.mat'];
 ConfigFile = ['testCreateConfig001_conf.mat'];
 
-delete([path_save '/' ConfigFile]);
+if(checkIfFileExists(path_save,ConfigFile))
+  delete([path_save '/' ConfigFile]);
+end
 
 try
   config = CreateConfiguration(Model,Constants,Values,DT,...
@@ -20,15 +22,7 @@ try
                         [path_save '/' Output], ...
                         [path_save '/' ConfigFile]);
 
-  file = dir(path_save);
-  result = false;
-  for i=1:length(file)
-    if(strcmp(file(i).name,ConfigFile))
-      result = true;
-      break
-    end
-  end
-
+  result = checkIfFileExists(path_save,ConfigFile);
   if(~result)
     msg = 'File not created';
     return;

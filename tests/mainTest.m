@@ -3,7 +3,7 @@
 %==================================================
 %
 %                                    © Jesus Carro 
-%                                       2014/07/04
+%                                       2014/07/07
 %
 %==================================================
 
@@ -20,61 +20,9 @@ disp('=================================================')
 disp(' ')
 disp(' ')
  
-% test = struct('functionHandle',@function,'name',name,...
-%               'expectedValue',value);
-% tests(end+1)=test;
+%tests = struct('functionHandle',[],'name',{},'expectedValue',{});
 
-
-test = struct('functionHandle',@testCreateConfig001,...
-	      'name','Create basic configuration',...
-              'expectedValue',true);
-tests(1)=test;
-
-
-test = struct('functionHandle',@testCreateConfig002,...
-              'name','Create basic configuration with a modified parameter',...
-              'expectedValue',true);
-tests(end+1)=test;
-
-test = struct('functionHandle',@testCreateConfig003,...
-              'name','Create basic configuration with CV and SV to save',...
-              'expectedValue',true);
-tests(end+1)=test;
-
-
-test = struct('functionHandle',@testCreateConfigSS001,...
-              'name','Create Steady State configuration',...
-              'expectedValue',true);
-tests(end+1)=test;
-
-
-test = struct('functionHandle',@testRunSimulation001,...
-              'name','Run basic configuration',...
-              'expectedValue',true);
-tests(end+1)=test;
-
-test = struct('functionHandle',@testRunSimulation002,...
-              'name','Run basic configuration with a modified parameter',...
-              'expectedValue',true);
-tests(end+1)=test;
-
-test = struct('functionHandle',@testRunSimulation003,...
-              'name','Run basic configuration with CV and SV to save',...
-              'expectedValue',true);
-tests(end+1)=test;
-
-
-test = struct('functionHandle',@testRunSimulationSS001,...
-              'name','Run Steady State Configuration',...
-              'expectedValue',true);
-tests(end+1)=test;
-
-
-
-
-
-
-
+tests = [configurationTests() runTests()];
 
 results = false(size(tests));
 

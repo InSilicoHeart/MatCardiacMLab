@@ -3,7 +3,13 @@
 ##Matlab toolbox to Simulate Electrophysiologycal Cardiac Models described in CellML files
 
 
-Develop by Jesús Carro
-Beta Version (v00.00)
-2014/06/25
+Jesus Carro Fernandez <br />
+jcarro@usj.es  
+                    
+School of Engineering<br />
+San Jorge University <br />
+www.usj.es  
+     
+Last Modification 2014/07/08
+
 

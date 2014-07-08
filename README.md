@@ -1,5 +1,4 @@
 #MatCardiacMLab
-------------------------------------------------
 
 ##Matlab toolbox to Simulate Electrophysiologycal Cardiac Models described in CellML files
 

@@ -1,21 +1,49 @@
-%% CalculateAPD - Calculates one Action Potential Duration for different 
-%                 percentages of repolarization
+%% CreateConfiguration - Creates a basic configuration for the 
+%            MatCardiacMLab Simulator
 %                                
 %
-%     [apd,time]=calculateAPD(values,t,perc)                                    
-%                                                                                                                                                                                                  
-%    Input:                                                                 
-%      values: Vector with membrane potential values                        
-%      t:      Time vector for the action potential                         
-%      perc:   Percentage of repolarization (between 0 and 1)               
-%                                                                           
-%    Output:                                                                
-%      apd:    Action Potential Duration of the APs in the value vector     
-%      time:   Instant of AP ending                                         
+%    config = createConfigurationAPDRateAdaptation(Model,...
+%                     Constants,Values,DT,CL1,nCLs1,CL2,nCLs2,...
+%                     sv_save,cv_save,nCLs_save,var2biomarker,Output,...
+%                     ConfigFile)
 %
-%  ---------------------------------------------------------------------------
+%    Input:                                                                 
+%      Model:       MatCardiacMLab Model Structure or string with the 
+%                   name of the model in the database that will be used
+%      Constants:   Cell array with the name of the model constants that
+%                   will be modified in the simulation
+%      Values:      Vector with the new values for the constants.
+%      DT:          Step size for the output in milliseconds.
+%      CL1:         Cycle length in milliseconds for the first part of 
+%                   the protocol.
+%      nCLs1:       Number of cycles in the first part of the protocol.
+%      CL2:         Cycle length in milliseconds for the second part of 
+%                   the protocol.
+%      nCLs2:       Number of cycles in the second part of the protocol.
+%      sv_save:     Cell array with the names of the State Variables to 
+%                   save.
+%      cv_save:     Cell array with the names of the Computed Variables
+%                   to save.
+%      nCL_save:    Number of CL to save.
+%      var2biomarker: Variables used to calculate the fast and the slow 
+%                   time constants.
+%      Output:      Name of the file where the results are stored.
+%      ConfigFile:  Name of the file where the configuration has to be 
+%                   saved (Optional).
+%                                                                           
+%    Output:  
+%      config: Structure with the configuration of the simulation.
+%
+%    Throws:
+%      InconsistentConstants: Length of the Constants cell array is 
+%                   different from the length of Values
+%
+%-----------------------------------------------------------------------
 % 
-% Electrophysiology Model Simulator (v00.00)
+% MatCardiacMLab (v00.00)
+%
+% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+% described in CellML files
 %
 % Jesus Carro Fernandez 
 % jcarro@usj.es  
@@ -24,27 +52,18 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/08
+% Last Modification 2014/07/09
 %
 
-%--- Create Configuration ---
-%
-%  Function to create a configuration file for the EMS simulator.
-%
-%   config = CreateConfigurationAPDRateAdaptation(Model,Constants,Values,DT,...
-%                                           CL1,nCLs1,CL2,nCLs2,sv_save,nCLs_save,...
-%                                           var2biomarker,Output [,ConfigFile])
-%
-%  Input Variables:
-%    - Model: Model's name in the data base that is going to be used.
-%    - Constants:
-%
-%  Output Variables:
-%    - config: configuration structure;
+function config = createConfigurationAPDRateAdaptation(Model,...
+                      Constants,Values,DT,CL1,nCLs1,CL2,nCLs2,...
+                      sv_save,cv_save,nCLs_save,var2biomarker,Output,...
+                      ConfigFile)
 
-function config = CreateConfigurationAPDRateAdaptation(Model,Constants,Values,DT,...
-								CL1,nCLs1,CL2,nCLs2,sv_save,cv_save,nCLs_save,...
-								var2biomarker,Output,ConfigFile)
+if(length(Constants)~=length(Values))
+  error('MatCardiacMLab:createConfigurationAPDRateAdaptation:InconsistentConstants',...
+     'Length of the Constants cell array is different from the length of Values')
+end
 
 config.Model = Model;
 config.Stimulation = 'APDRateAdaptation';

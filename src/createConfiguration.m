@@ -28,9 +28,8 @@
 %      config: Structure with the configuration of the simulation.
 %
 %    Throws:
-%      MatCardiacMLab:createConfiguration:InconsistentConstants: Length 
-%                   of the Constants cell array is different from the 
-%                   length of Values
+%      InconsistentConstants: Length of the Constants cell array is 
+%                   different from the length of Values
 %
 %-----------------------------------------------------------------------
 % 
@@ -53,7 +52,7 @@ function config = createConfiguration(Model,Constants,Values,DT,...
     Stimulation,TimeEnd,sv_save,cv_save,Output,varargin)
 
 if(length(Constants)~=length(Values))
-error('MatCardiacMLab:createConfiguration:InconsistentConstants',...
+  error('MatCardiacMLab:createConfiguration:InconsistentConstants',...
      'Length of the Constants cell array is different from the length of Values')
 end
 

@@ -9,8 +9,7 @@
 %              COR
 %      modelFileOutput: String with the name of the file where the *.m 
 %              file of the model is saved
-%      modelName: String with the name of the model used in the database
-%              structure
+%      modelName: String with the name of the model 
 %                                                                           
 %    Output:                                                                
 %      model: Model structure for the simulator                                       
@@ -35,7 +34,7 @@
 % Last Modification 2014/07/09
 %
 
-function model = CreateModel(modelFileInput,modelFileOutput,modelName)
+function model = createModel(modelFileInput,modelFileOutput,modelName)
 
 %"\r\n"
 CRLF = char([13 10]);
@@ -196,5 +195,5 @@ fwrite(newFile,newCode);
 fclose(newFile);
 
 % Creates the model structure
-model = CreateModelStructure(modelName,SV0,str2func(functionName),...
-  SVNames,SVUnits,CNames,C0,CUnits,CVNames,CVUnits);
+model = CreateModelStructure(modelName,str2func(functionName),...
+  SV0,SVNames,SVUnits,C0,CNames,CUnits,CVNames,CVUnits);

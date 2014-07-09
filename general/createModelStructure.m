@@ -1,21 +1,35 @@
-%% CalculateAPD - Calculates one Action Potential Duration for different 
-%                 percentages of repolarization
-%                                
+%% CreateModelStructure - Creates a model structure for the 
+%            MatCardiacMLab simualtor                                
 %
-%     [apd,time]=calculateAPD(values,t,perc)                                    
+%       model = createModelStructure(Name,mf,SV0,SVNames,SVUnits,...
+%                                    C0,CNames,CUnits,CVNames,CVUnits)                                    
 %                                                                                                                                                                                                  
 %    Input:                                                                 
-%      values: Vector with membrane potential values                        
-%      t:      Time vector for the action potential                         
-%      perc:   Percentage of repolarization (between 0 and 1)               
+%      Name:    String with model's name
+%      mf:      Function of the model
+%      SV0:     Vector with initial value of the state variables
+%      SVNames: Cell array with state variable names
+%      SVUnits: Cell array with state variable units
+%      C0:      Vector with the constants values
+%      CNames:  Cell array with constant names
+%      CUnits:  Cell array with constant units
+%      CVNames: Cell array with computed variable names
+%      CVUnits: Cell array with computed variable units          
 %                                                                           
 %    Output:                                                                
-%      apd:    Action Potential Duration of the APs in the value vector     
-%      time:   Instant of AP ending                                         
+%      model:   Model structure
 %
-%  ---------------------------------------------------------------------------
+%    Throws:
+%      SVInconsistence: Dimensions of SV structures don't match
+%      CVInconsistence: Dimensions of CV structures don't match
+%      ConstInconsistence:Dimensions of Constant structures don't match
+%
+%-----------------------------------------------------------------------
 % 
-% Electrophysiology Model Simulator (v00.00)
+% MatCardiacMLab (v00.00)
+%
+% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+% described in CellML files
 %
 % Jesus Carro Fernandez 
 % jcarro@usj.es  
@@ -24,21 +38,50 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/08
+% Last Modification 2014/07/09
 %
 
-function Model = CreateModelStructure(Name,SV0,mf,SVNames,SVUnits,CNames,C0,CUnits,CVNames,CVUnits)
+function model = createModelStructure(Name,mf,SV0,SVNames,SVUnits,...
+                                       C0,CNames,CUnits,CVNames,CVUnits)
  
-Model.Name = Name;
-Model.mf = mf;
-Model.SVnum = length(SV0);
-Model.SV0 = SV0;
-Model.SVNames = SVNames;
-Model.SVUnits = SVUnits;
-Model.Cnum = length(CNames);
-Model.C0 = C0;
-Model.CNames = CNames;
-Model.CUnits = CUnits;
-Model.CVnum = length(CVNames);
-Model.CVNames = CVNames;
-Model.CVUnits = CVUnits;
+model.Name = Name;
+model.mf = mf;
+
+model.SVnum = length(SV0);
+model.SV0 = SV0;
+model.SVNames = SVNames;
+model.SVUnits = SVUnits;
+
+if(length(SVNames)~=SVnum)
+  error('MatCardiacMLab:createModelStructure:SVInconsistence',...
+        'SVNames length doesn''t matcch SV length')
+end
+
+if(length(SVUnits)~=SVnum)
+  error('MatCardiacMLab:createModelStructure:SVInconsistence',...
+        'SVUnits length doesn''t matcch SV length')
+end
+
+model.Cnum = length(C0);
+model.C0 = C0;
+model.CNames = CNames;
+model.CUnits = CUnits;
+
+if(length(CNames)~=SVnum)
+  error('MatCardiacMLab:createModelStructure:ConstInconsistence',...
+        'CNames length doesn''t matcch Const length')
+end
+
+if(length(CUnits)~=SVnum)
+  error('MatCardiacMLab:createModelStructure:ConstInconsistence',...
+        'CUnits length doesn''t matcch Const length')
+end
+
+model.CVnum = length(CVNames);
+model.CVNames = CVNames;
+model.CVUnits = CVUnits;
+
+if(length(CUnits)~=SVnum)
+  error('MatCardiacMLab:createModelStructure:CVInconsistence',...
+        'CVUnits length doesn''t matcch CV length')
+end

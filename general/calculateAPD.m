@@ -19,8 +19,8 @@
 %    returns Inf.
 %
 %    Throws:
-%      MatCardiacMLab:calculateAPD:BadPercent: Percentage bigger than 1
-%      MatCardiacMLab:calculateAPD:NegativePercent: Negative Percentage
+%      BadPercent: Percentage bigger than 1
+%      NegativePercent: Negative Percentage
 %
 %-----------------------------------------------------------------------
 % 

@@ -22,6 +22,8 @@
 %            MatCardiacMLab Simulator using the Steady State protocol.
 %  CreateModel - Creates a model for the simulator based on the file
 %            exported by COR to MatLab
+%  CreateModelStructure - Creates a model structure for the 
+%            MatCardiacMLab simualtor 
 %
 %-----------------------------------------------------------------------
 % 

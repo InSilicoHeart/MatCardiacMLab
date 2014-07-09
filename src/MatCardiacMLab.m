@@ -75,11 +75,11 @@ disp(['Model: ' model.Name])
 options = odeset('RelTol',1e-12,'MaxStep',1);
 
 if(ischar(configuration.Stimulation))
-    Y0 = RunSimulationChar(configuration,model,options);
+    Y0 = runSimulationChar(configuration,model,options);
 else if(iscell(configuration.Stimulation))
-    Y0 = RunSimulationCell(configuration,model,options);
+    Y0 = runSimulationCell(configuration,model,options);
     else
-        Y0 = RunSimulationNoCell(configuration,model,options);
+        Y0 = runSimulationNoCell(configuration,model,options);
     end
 end
 

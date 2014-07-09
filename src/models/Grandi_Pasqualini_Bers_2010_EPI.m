@@ -74,7 +74,7 @@ stim_amplitude = 38.2;   % uA_per_uF (in membrane_potential)
 stim_duration = 1.0;   % msec (in membrane_potential)
 stim_start = 0.0;   % msec (in membrane_potential)
 
-Reasign(Constants, Values)
+reasign(Constants, Values)
 
 %-------------------------------------------------------------------------------
 % Computed variables

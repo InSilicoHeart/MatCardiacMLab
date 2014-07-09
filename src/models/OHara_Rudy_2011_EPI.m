@@ -165,7 +165,7 @@ zna = 1.0;   % dimensionless (in physical_constants)
 PKNa = 0.01833;   % dimensionless (in reversal_potentials)
 bt = 4.75;   % millisecond (in ryr)
 
-Reasign(Constants, Values)
+reasign(Constants, Values)
 
 %-------------------------------------------------------------------------------
 % Computed variables

@@ -111,17 +111,17 @@ ind2 = findstr('};',newCode(ind:end));
 eval(['SVUnits' newCode(ind+8:ind+ind2-1) ';'])
 
 % Check if the file has been previously processed by MatCarciacMLab and 
-% the Reasign function has been added
-ind=findstr(newCode,'Reasign(Constants, Values)');
+% the reasign function has been added
+ind=findstr(newCode,'reasign(Constants, Values)');
 
 if(isempty(ind))
-  % The Reasign function hasn't been added. Add it before the Constants
+  % The reasign function hasn't been added. Add it before the Constants
   % definition
   compVarStartStr=[sepLine CRLF '% Computed variables' CRLF sepLine];
 
   ind = findstr(newCode,compVarStartStr);
 
-  newCode=[newCode(1:ind-1) 'Reasign(Constants, Values)' ...
+  newCode=[newCode(1:ind-1) 'reasign(Constants, Values)' ...
     CRLF CRLF newCode(ind:end)];
 end
 
@@ -130,7 +130,7 @@ constStartStr=[ sepLine CRLF '% Constants' CRLF sepLine];
 
 indConstStart = findstr(newCode,constStartStr);
 constantsCode=newCode(indConstStart+length(constStartStr):end);
-indConstEnd = findstr('Reasign(Constants, Values)',constantsCode);
+indConstEnd = findstr('reasign(Constants, Values)',constantsCode);
 constantsCode=constantsCode(1:indConstEnd-1);
 
 % Remove all the spaces

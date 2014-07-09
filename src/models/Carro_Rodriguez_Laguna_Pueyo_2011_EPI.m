@@ -172,7 +172,7 @@ A_NaK = 1; % dimensionless (in Sodium_Potasium_Pump_Current)
 A_CaL = 1; % dimensionless (in L_Type_Calcium_Current)
 A_Kp = 1; % dimensionless (in Plateau_K_Current)
  
-Reasign(Constants, Values)
+reasign(Constants, Values)
 
 %-------------------------------------------------------------------------------
 % Computed variables

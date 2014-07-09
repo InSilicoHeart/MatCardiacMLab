@@ -212,7 +212,7 @@ TNa = 294.16;   % kelvin (in INa)
 stim_amplitude = -15.0;   % uA_per_uF (in I_stimulus)
 stim_duration = 3.0;   % ms (in I_stimulus)
 
-Reasign(Constants, Values)
+reasign(Constants, Values)
 
 %-------------------------------------------------------------------------------
 % Computed variables

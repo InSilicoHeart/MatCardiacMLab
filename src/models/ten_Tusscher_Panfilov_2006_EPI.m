@@ -102,7 +102,7 @@ K_mk = 1.0;   % millimolar (in sodium_potassium_pump_current)
 P_NaK = 2.724;   % picoA_per_picoF (in sodium_potassium_pump_current)
 g_to = 0.294;   % nanoS_per_picoF (in transient_outward_current)
 
-Reasign(Constants, Values)
+reasign(Constants, Values)
 
 %-------------------------------------------------------------------------------
 % Computed variables

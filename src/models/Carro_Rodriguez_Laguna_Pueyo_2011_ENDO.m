@@ -164,7 +164,7 @@ R = 8314.0;   % joule_per_kmole_kelvin (in membrane)
 Radius_cell = 10.25e-5;   % decimetre (in membrane)
 T = 310.0;   % kelvin (in membrane)
 
-Reasign(Constants, Values)
+reasign(Constants, Values)
 
 %-------------------------------------------------------------------------------
 % Computed variables

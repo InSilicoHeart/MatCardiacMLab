@@ -33,7 +33,7 @@
 %                Jesus Carro Fernandez 2012/07/20
 %
 
-function Y0=MatCardiacMLab(configuration,database)
+function Y0=MCMLSimulator(configuration,database)
 
 disp(' ')
 tic
@@ -45,7 +45,7 @@ switch nargin
         if(ischar(configuration))
             configuration=load(configuration);
         end
-        database = 'default.mat';
+        database = 'MatCardiacMLabDB.mat';
     otherwise
         if(ischar(configuration))
             configuration=load(configuration);

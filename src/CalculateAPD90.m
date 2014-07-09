@@ -1,17 +1,23 @@
-%% CalculateAPD - Calculates one Action Potential Duration for different 
-%                 percentages of repolarization
+%% CalculateAPD90 - Calculates Action Potential Duration at 90% of 
+%                   repolarization. Calculates one APD for several membrane 
+%                   potential series.
 %                                
 %
-%     [apd,time]=calculateAPD(values,t,perc)                                    
+%     [apd,time] = calculateAPD90(values,t)                                    
 %                                                                                                                                                                                                  
 %    Input:                                                                 
-%      values: Vector with membrane potential values                        
-%      t:      Time vector for the action potential                         
-%      perc:   Percentage of repolarization (between 0 and 1)               
+%      values: Matrix with membrane potential series in each column                        
+%      t:      Time vector in a column for the action potential                         
 %                                                                           
 %    Output:                                                                
-%      apd:    Action Potential Duration of the APs in the value vector     
-%      time:   Instant of AP ending                                         
+%      apd:    Action Potential Duration of the APs in the value vector.     
+%      time:   Instants of AP ending.
+%
+%    If there isn't an stimulated AP, apd and time returns Nan.
+%    If the AP doesn't reach the 90% of the repolarization, apd and time 
+%    returns Inf.
+%
+%    See also CalculateAPD
 %
 %  ---------------------------------------------------------------------------
 % 

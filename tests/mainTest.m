@@ -11,8 +11,8 @@ clc;
 clear all;
 close all;
 
-addpath('../src/')
-addpath('../src/models')
+addpath('../general/')
+addpath('../models')
 
 disp('=================================================')
 disp('              EMS Simulator Test')

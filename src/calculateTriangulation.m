@@ -1,21 +1,18 @@
-%% CalculateAPD90 - Calculates Action Potential Duration at 90% of 
-%            repolarization. Calculates one APD for several membrane
-%            potential series.
+%% CalculateTriangulation - Calculates Triangulation for several 
+%          membrane potential series.
 %                                
 %
-%     [apd90,time] = calculateAPD90(values,t)                                    
+%     triangulation = calculateTriangulation(values,t)                                    
 %                                                                                                                                                                                                  
 %    Input:                                                                 
 %      values: Matrix with membrane potential series in each column                        
 %      t:      Time vector in a column for the action potential                         
 %                                                                           
 %    Output:                                                                
-%      apd90:  Action Potential Duration of the APs in the value vector.     
-%      time:   Instants of AP ending.
+%      triangulation:  Difference between APD90 and APD50
 %
-%    If there isn't an stimulated AP, apd and time returns Nan.
-%    If the AP doesn't reach the 90% of the repolarization, apd and time 
-%    returns Inf.
+%    If there isn't an stimulated AP returns Nan.
+%    If the AP doesn't reach the 90% of the repolarization returns Inf.
 %
 %    See also CalculateAPD
 %
@@ -36,6 +33,8 @@
 % Last Modification 2014/07/09
 %
 
-function [apd90,time]=calculateAPD90(values,t)
+function triangulation = calculateTriangulation(values,t)
 
-[apd90,time]=calculateAPD(values,t,0.9);
+apd90=calculateAPD(values,t,0.9);
+apd50=calculateAPD(values,t,0.5);
+triangulation = apd90-apd50;

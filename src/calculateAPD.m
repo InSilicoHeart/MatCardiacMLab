@@ -1,6 +1,6 @@
 %% CalculateAPD - Calculates Action Potential Duration for different 
-%                 percentages of repolarization. Calculates one APD for 
-%                 several membrane potential series.
+%            percentages of repolarization. Calculates one APD for 
+%            several membrane potential series.
 %                                
 %
 %     [apd,time]=calculateAPD(values,t,perc)                                    
@@ -19,15 +19,15 @@
 %    returns Inf.
 %
 %    Throws:
-%      MatLabEMS:calculateAPD:BadPercentage: Percentage bigger than 1
-%      MatLabEMS:calculateAPD:NegativePercentage: Negative Percentage
+%      MatCardiacMLab:calculateAPD:BadPercent: Percentage bigger than 1
+%      MatCardiacMLab:calculateAPD:NegativePercent: Negative Percentage
 %
-%  ---------------------------------------------------------------------------
+%-----------------------------------------------------------------------
 % 
 % MatCardiacMLab (v00.00)
 %
-% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models described in
-% CellML files
+% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+% described in CellML files
 %
 % Jesus Carro Fernandez 
 % jcarro@usj.es  
@@ -43,11 +43,11 @@
 function [apd,time]=calculateAPD(values,t,perc)
 
 if(perc>1)
-  error('MatLabEMS:calculateAPD:BadPercentage','Percentage value is bigger than 1')
+  error('MatCardiacMLab:calculateAPD:BadPercentage','Percentage value is bigger than 1')
 end
 
 if(perc<1)
-  error('MatLabEMS:calculateAPD:NegativePercentage','Percentage value is negative')
+  error('MatCardiacMLab:calculateAPD:NegativePercentage','Percentage value is negative')
 end
 
 % In the case the values are empty, it's necessary to return an empty matrix

@@ -49,22 +49,22 @@ tini = configuration.Stimulation(1);
 if(length(configuration.Stimulation)>1)
     tfin = configuration.Stimulation(2);
 else
-    tfin = configuration.Time;
+    tfin = configuration.TimeEnd;
 end
 nextStim = 1;
 
 
-if(tfin>configuration.Time)
-    tfin = configuration.Time;
+if(tfin>configuration.TimeEnd)
+    tfin = configuration.TimeEnd;
 end
 
-time{1}=tini:dt:configuration.Time;
+time{1}=tini:dt:configuration.TimeEnd;
 
 SV{1}.result=zeros(length(time{1}),length(sv_save));
 CV{1}.result=zeros(length(time{1}),length(cv_save));
 
 
-while (tini<configuration.Time)       
+while (tini<configuration.TimeEnd)       
     t=(tini:dt:tfin)-tini;
     steps = length(t);
     disp(['Stimulation ' num2str(numstim) ': ' num2str(tini) 'ms to ' num2str(tfin) 'ms'])
@@ -107,8 +107,8 @@ while (tini<configuration.Time)
         tfin = configuration.Stimulation(nextStim+1);
     end
 
-    if(tfin>configuration.Time)
-        tfin=configuration.Time;
+    if(tfin>configuration.TimeEnd)
+        tfin=configuration.TimeEnd;
     end
 end
 

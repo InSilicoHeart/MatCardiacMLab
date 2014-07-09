@@ -1,21 +1,41 @@
-%% CalculateAPD - Calculates one Action Potential Duration for different 
-%                 percentages of repolarization
+%% CreateConfiguration - Creates a basic configuration for the 
+%            MatCardiacMLab Simulator
 %                                
 %
-%     [apd,time]=calculateAPD(values,t,perc)                                    
-%                                                                                                                                                                                                  
+%    config = createConfiguration(Model,Constants,Values,DT,Stimulation,
+%                              Time,sv_save,cv_save,Output[,ConfigFile]) 
+%                                                                                                                                               
 %    Input:                                                                 
-%      values: Vector with membrane potential values                        
-%      t:      Time vector for the action potential                         
-%      perc:   Percentage of repolarization (between 0 and 1)               
+%      Model:       MatCardiacMLab Model Structure or string with the 
+%                   name of the model in the database that will be used
+%      Constants:   Cell array with the name of the model constants that
+%                   will be modified in the simulation
+%      Values:      Vector with the new values for the constants.
+%      DT:          Step size for the output in milliseconds
+%      Stimulation: Vector with the instants of stimulations. The first
+%                   element indicates the time init (value 0 is 
+%                   recommended).
+%      TimeEnd:        
+%      sv_save:
+%      cv_save:
+%      Output:      
+%      ConfigFile: Name of the file where the configuration has to be 
+%                  saved (Optional).
 %                                                                           
-%    Output:                                                                
-%      apd:    Action Potential Duration of the APs in the value vector     
-%      time:   Instant of AP ending                                         
+%    Output:  
+%      config: Structure with the information for a simulation.
 %
-%  ---------------------------------------------------------------------------
+%    Throws:
+%      MatCardiacMLab:createConfiguration:InconsistentConstants: Length 
+%                   of the Constants cell array is different from the 
+%                   length of Values
+%
+%-----------------------------------------------------------------------
 % 
-% Electrophysiology Model Simulator (v00.00)
+% MatCardiacMLab (v00.00)
+%
+% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+% described in CellML files
 %
 % Jesus Carro Fernandez 
 % jcarro@usj.es  
@@ -24,49 +44,23 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/08
+% Last Modification 2014/07/09
 %
 
-%=======================================================================
-%
-% CreateConfiguration: Function to create a configuration file for the 
-%              EMS simulator.
-%
-%-----------------------------------------------------------------------
-%
-%    CreateConfiguration(Model,Constants,Values,DT,...
-%                        Stimulation,Time,sv_save,cv_save,...
-%                        Output[,ConfigFile])
-%
-%    Input:
-%      Model: Model's name in the data base that is going to be used.
-%      Constants:
-%
-%    Output:
-%      config: configuration structure;
-%
-%-----------------------------------------------------------------------
-%
-%
-%
-%=======================================================================
-%                  
-%                                               Jesus Carro Fernandez
-%                                               Universidad San Jorge
-%                                                       jcarro@usj.es
-%                                                          2013/07/26
-%
-%=======================================================================
+function config = createConfiguration(Model,Constants,Values,DT,...
+    Stimulation,TimeEnd,sv_save,cv_save,Output,varargin)
 
-function config = CreateConfiguration(Model,Constants,Values,DT,...
-    Stimulation,Time,sv_save,cv_save,Output,varargin)
+if(length(Constants)~=length(Values))
+error('MatCardiacMLab:createConfiguration:InconsistentConstants',...
+     'Length of the Constants cell array is different from the length of Values')
+end
 
 config.Model = Model;
 config.Constants = Constants;
 config.Values = Values;
 config.DT = DT;
 config.Stimulation = Stimulation;
-config.Time = Time;
+config.TimeEnd = TimeEnd;
 config.Output = Output;
 config.sv_save = sv_save;
 config.cv_save = cv_save;

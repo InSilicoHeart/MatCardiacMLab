@@ -1,14 +1,14 @@
-%% CalculateDiastolic - Calculates diastolic value for time series of 
+%% CalculateSystolic - Calculates systolic value for time series of 
 %            several variables
 %
-%     [dia,time]=calculateDiastolic(values,t)
+%     [sys,time]=calculateSystolic(values,t)
 %                                                                                                                                                                                                  
 %    Input:                                                                 
 %      values: Matrix with variable series in each column                        
 %      t:      Time vector for the series                         
 %                                                                           
 %    Output:                                                                
-%      dia:    Diastolic Value     
+%      sys:    Systolic Value     
 %      time:   Instant of diastolic value                                         
 %
 %-----------------------------------------------------------------------
@@ -28,7 +28,7 @@
 % Last Modification 2014/07/09
 %
 
-function [dia,time]=calculateDiastolic(values,t)
+function [sys,time]=calculateSystolic(values,t)
 
-[dia,ind]=min(values);
+[sys,ind]=max(values);
 time=t(ind);

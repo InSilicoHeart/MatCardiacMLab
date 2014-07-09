@@ -39,7 +39,7 @@ for j=1:length(names)
   else if(length(ind)>1)
     error('MatCardiacMLab:getIndexToSave:MultipleValues',...
       ['There are more than one element with the label ' names{j} ...
-      ' in ' cathegory]));
+      ' in ' cathegory]);
     else
       indSave = [indSave ind];
     end

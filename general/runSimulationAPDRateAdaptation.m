@@ -29,9 +29,9 @@
 
 function SV0=runSimulationAPDRateAdaptation(configuration,model,options)
 
-sv_save = getIndexToSave(configuration.sv_save,model,'sv_save');
-cv_save = getIndexToSave(configuration.cv_save,model,'cv_save');
-var2biomarker = getIndexToSave(configuration.var2biomarker,model,'var2biomarker');
+sv_save = getIndexToSave(configuration.sv_save,model,'SVNames');
+cv_save = getIndexToSave(configuration.cv_save,model,'CVNames');
+var2biomarker = getIndexToSave(configuration.var2biomarker,model,'SVNames');
 
 apd90_sv = var2biomarker;
 

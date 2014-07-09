@@ -4,20 +4,22 @@
 % described in CellML files                               
 %
 %  CalculateAPD - Calculates one Action Potential Duration for different 
-%            percentages of repolarization
+%            percentages of repolarization.
 %  CalculateAPD90 - Calculates Action Potential Duration at 90% of 
 %            repolarization.
 %  CalculateDiastolic - Calculates diastolic value for time series of 
-%            several variables
+%            several variables.
 %  CalculateSystolic - Calculates systolic value for time series of 
-%            several variables
+%            several variables.
 %  CalculateTriangulation - Calculates Triangulation for several 
-%            membrane potential series
+%            membrane potential series.
 %  CreateConfiguration - Creates a basic configuration for the 
-%            MatCardiacMLab Simulator
+%            MatCardiacMLab Simulator.
 %  CreateConfigurationAPDRateAdaptation - Creates configurations for the 
 %            MatCardiacMLab Simulator using the APD Rate Adaptation 
-%            protocol
+%            protocol.
+%  CreateConfigurationSteadyState - Creates configurations for the 
+%            MatCardiacMLab Simulator using the Steady State protocol.
 %
 %-----------------------------------------------------------------------
 % 

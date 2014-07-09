@@ -15,6 +15,9 @@
 %            membrane potential series
 %  CreateConfiguration - Creates a basic configuration for the 
 %            MatCardiacMLab Simulator
+%  CreateConfigurationAPDRateAdaptation - Creates configurations for the 
+%            MatCardiacMLab Simulator using the APD Rate Adaptation 
+%            protocol
 %
 %-----------------------------------------------------------------------
 % 

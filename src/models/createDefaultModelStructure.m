@@ -1,21 +1,14 @@
-%% CalculateAPD - Calculates one Action Potential Duration for different 
-%                 percentages of repolarization
-%                                
+%% CreateDefaultModelStructure - Creates the default structure with the 
+%            included in the installation
 %
-%     [apd,time]=calculateAPD(values,t,perc)                                    
-%                                                                                                                                                                                                  
-%    Input:                                                                 
-%      values: Vector with membrane potential values                        
-%      t:      Time vector for the action potential                         
-%      perc:   Percentage of repolarization (between 0 and 1)               
-%                                                                           
-%    Output:                                                                
-%      apd:    Action Potential Duration of the APs in the value vector     
-%      time:   Instant of AP ending                                         
+%       createDefaultModelStructure()
 %
-%  ---------------------------------------------------------------------------
+%-----------------------------------------------------------------------
 % 
-% Electrophysiology Model Simulator (v00.00)
+% MatCardiacMLab (v00.00)
+%
+% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+% described in CellML files
 %
 % Jesus Carro Fernandez 
 % jcarro@usj.es  
@@ -24,10 +17,10 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/08
+% Last Modification 2014/07/09
 %
 
-function CreateDefaultModelStructure(output)
+function createDefaultModelStructure()
 
 % 1. Carro et al. 2011 EPI
 a.Carro2011EPI = CreateModel('models/Carro_Rodriguez_Laguna_Pueyo_2011_EPI',...
@@ -69,9 +62,4 @@ a.Grandi2010ENDO = CreateModel('models/Grandi_Pasqualini_Bers_2010_ENDO',...
 a.OHara2011EPI = CreateModel('models/OHara_Rudy_2011_EPI',...
     'models/OHara_Rudy_2011_EPI','O''Hara et al. 2011 - EPI');
 
-if(nargin==0)
-    [filename, pathname] = uigetfile('*.mat','Select a file','default.mat');
-    output = [pathname '/' filename];
-end
-
-save(output,'-struct','a')
+save('default','-struct','a')

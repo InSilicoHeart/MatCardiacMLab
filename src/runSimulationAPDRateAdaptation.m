@@ -27,7 +27,7 @@
 % Last Modification 2014/07/08
 %
 
-function SV0=RunSimulationAPDRateAdaptation(configuration,model,options)
+function SV0=runSimulationAPDRateAdaptation(configuration,model,options)
 
 [sv_save,cv_save,var2biomarker] = getIndexToSave(configuration,model);
 
@@ -82,7 +82,7 @@ for i=1:nCLs1
 
     apd90_val=Y(:,apd90_sv);
     
-    apd90(i,:) = CalculateAPD90(apd90_val,t');
+    apd90(i,:) = calculateAPD90(apd90_val,t');
 
     % Evaluate Computed Variables
     ComVar = zeros(length(T),model.CVnum);
@@ -119,7 +119,7 @@ for i=1:nCLs2
     
     apd90_val=Y(:,apd90_sv);
     
-    apd90(i+nCLs1,:) = CalculateAPD90(apd90_val,t');
+    apd90(i+nCLs1,:) = calculateAPD90(apd90_val,t');
    
     % Evaluate Computed Variables
     ComVar = zeros(length(T),model.CVnum);

@@ -27,7 +27,7 @@
 % Last Modification 2014/07/08
 %
 
-function SV0=RunSimulationCell(configuration,model,options)
+function SV0=runSimulationCell(configuration,model,options)
 
 if(length(configuration.sv_save)<1)
     sv_save = [];

@@ -27,7 +27,7 @@
 % Last Modification 2014/07/08
 %
 
-function SV0=RunSimulationChar(configuration,model,options)
+function SV0=runSimulationChar(configuration,model,options)
 
 disp(['Protocol: ' configuration.Stimulation])
 if(~isempty(configuration.Constants))
@@ -38,12 +38,12 @@ if(~isempty(configuration.Constants))
 end
   
 if(strcmp(configuration.Stimulation,'SteadyState'))
-    SV0=RunSimulationSteadyState(configuration,model,options);
+    SV0=runSimulationSteadyState(configuration,model,options);
     return;
 end
 
 if(strcmp(configuration.Stimulation,'APDRateAdaptation'))
-    SV0=RunSimulationAPDRateAdaptation(configuration,model,options);
+    SV0=runSimulationAPDRateAdaptation(configuration,model,options);
     return;
 end
 

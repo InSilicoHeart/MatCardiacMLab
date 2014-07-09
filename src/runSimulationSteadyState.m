@@ -27,7 +27,7 @@
 % Last Modification 2014/07/08
 %
 
-function SV0=RunSimulationSteadyState(configuration,model,options)
+function SV0=runSimulationSteadyState(configuration,model,options)
 
 [sv_save,cv_save,var2biomarker] = getIndexToSave(configuration,model);
 
@@ -85,10 +85,10 @@ for i=1:nCLs
     dia_val=Y(:,dia_sv);
     sys_val=Y(:,sys_sv);
     
-    apd90(i,:) = CalculateAPD90(apd90_val,t');
-    trian(i,:) = CalculateTriangulation(trian_val,t');
-    dia(i,:)   = CalculateDiastolic(dia_val,t');
-    sys(i,:)   = CalculateSystolic(sys_val,t');
+    apd90(i,:) = calculateAPD90(apd90_val,t');
+    trian(i,:) = calculateTriangulation(trian_val,t');
+    dia(i,:)   = calculateDiastolic(dia_val,t');
+    sys(i,:)   = calculateSystolic(sys_val,t');
 
     % Evaluate Computed Variables
     ComVar = zeros(length(T),model.CVnum);

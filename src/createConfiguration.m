@@ -12,18 +12,20 @@
 %                   will be modified in the simulation
 %      Values:      Vector with the new values for the constants.
 %      DT:          Step size for the output in milliseconds
-%      Stimulation: Vector with the instants of stimulations. The first
-%                   element indicates the time init (value 0 is 
+%      Stimulation: Vector with the instants of stimulations in ms. The
+%                   first element indicates the time init (value 0 is 
 %                   recommended).
-%      TimeEnd:        
-%      sv_save:
-%      cv_save:
-%      Output:      
-%      ConfigFile: Name of the file where the configuration has to be 
-%                  saved (Optional).
+%      TimeEnd:     Instant of time where the simulation ends (ms).   
+%      sv_save:     Cell array with the names of the State Variables to 
+%                   save.
+%      cv_save:     Cell array with the names of the Computed Variables
+%                   to save.
+%      Output:      Name of the file where the results are stored.
+%      ConfigFile:  Name of the file where the configuration has to be 
+%                   saved (Optional).
 %                                                                           
 %    Output:  
-%      config: Structure with the information for a simulation.
+%      config: Structure with the configuration of the simulation.
 %
 %    Throws:
 %      MatCardiacMLab:createConfiguration:InconsistentConstants: Length 

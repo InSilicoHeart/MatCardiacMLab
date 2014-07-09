@@ -12,11 +12,9 @@
 %  CalculateSystolic - Calculates systolic value for time series of 
 %            several variables
 %  CalculateTriangulation - Calculates Triangulation for several 
-%            membrane potential series.
-%  CreateModel - Function to create a model for the simulator based on
-%            the MatLab file created by COR with a CellML file
-%  CreateConfiguration - Function to create a configuration file for the  
-%            MatCardiacMLab simulator.
+%            membrane potential series
+%  CreateConfiguration - Creates a basic configuration for the 
+%            MatCardiacMLab Simulator
 %
 %-----------------------------------------------------------------------
 % 

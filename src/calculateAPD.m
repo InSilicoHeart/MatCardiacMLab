@@ -46,7 +46,7 @@ if(perc>1)
   error('MatCardiacMLab:calculateAPD:BadPercentage','Percentage value is bigger than 1')
 end
 
-if(perc<1)
+if(perc<0)
   error('MatCardiacMLab:calculateAPD:NegativePercentage','Percentage value is negative')
 end
 

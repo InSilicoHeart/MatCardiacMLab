@@ -24,6 +24,8 @@
 %            MatCardiacMLab simualtor 
 %  fitterExp - used to calculate the error of fit data to an 
 %            exponential function whith the form: A*exp(-t/B)+C
+%  getIndexToSave - Finds the numerical index of same variables from 
+%            their name inside a model
 %
 %-----------------------------------------------------------------------
 % 

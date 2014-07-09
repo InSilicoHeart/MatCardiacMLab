@@ -1,21 +1,27 @@
-%% CalculateAPD - Calculates one Action Potential Duration for different 
-%                 percentages of repolarization
+%% getIndexToSave - Finds the numerical index of same variables from 
+%            their name inside a model
 %                                
 %
-%     [apd,time]=calculateAPD(values,t,perc)                                    
+%     indSave = getIndexToSave(names,model,cathegory)                                    
 %                                                                                                                                                                                                  
 %    Input:                                                                 
-%      values: Vector with membrane potential values                        
-%      t:      Time vector for the action potential                         
-%      perc:   Percentage of repolarization (between 0 and 1)               
+%      names:     Cell array with the name of the variable
+%      model:     Model structure where the variables are look for                         
+%      cathegory: Name of the field wher names are stored               
 %                                                                           
 %    Output:                                                                
-%      apd:    Action Potential Duration of the APs in the value vector     
-%      time:   Instant of AP ending                                         
+%      indSave:   Vector with the numerical index of names in model   
+%  
+%    Throws:
+%      MultipleValues: There are more than one element with the label 
+%                 names in cathegory
 %
-%  ---------------------------------------------------------------------------
+%-----------------------------------------------------------------------
 % 
-% Electrophysiology Model Simulator (v00.00)
+% MatCardiacMLab (v00.00)
+%
+% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+% described in CellML files
 %
 % Jesus Carro Fernandez 
 % jcarro@usj.es  
@@ -24,7 +30,7 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/08
+% Last Modification 2014/07/09
 %
 
 function indSave = getIndexToSave(names,model,cathegory)

@@ -20,6 +20,8 @@
 %            protocol.
 %  CreateConfigurationSteadyState - Creates configurations for the 
 %            MatCardiacMLab Simulator using the Steady State protocol.
+%  CreateModel - Creates a model for the simulator based on the file
+%            exported by COR to MatLab
 %
 %-----------------------------------------------------------------------
 % 

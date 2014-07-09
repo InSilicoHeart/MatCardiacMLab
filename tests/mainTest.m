@@ -22,6 +22,7 @@ disp(' ')
  
 %tests = struct('functionHandle',[],'name',{},'expectedValue',{});
 
+mkdir('testResults')
 tests = [configurationTests()];% runTests()];
 
 results = false(size(tests));

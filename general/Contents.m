@@ -1,29 +1,29 @@
-%% MatCardiacMLab (v00.00)
+%% MatCardiacMLab/general: Matlab toolbox to Simulate 
+%       Electrophysiologycal Cardiac Models described in CellML files                               
 %
-% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models
-% described in CellML files                               
-%
-%  CalculateAPD - Calculates one Action Potential Duration for different 
+%  calculateAPD - Calculates one Action Potential Duration for different 
 %            percentages of repolarization.
-%  CalculateAPD90 - Calculates Action Potential Duration at 90% of 
+%  calculateAPD90 - Calculates Action Potential Duration at 90% of 
 %            repolarization.
-%  CalculateDiastolic - Calculates diastolic value for time series of 
+%  calculateDiastolic - Calculates diastolic value for time series of 
 %            several variables.
-%  CalculateSystolic - Calculates systolic value for time series of 
+%  calculateSystolic - Calculates systolic value for time series of 
 %            several variables.
-%  CalculateTriangulation - Calculates Triangulation for several 
+%  calculateTriangulation - Calculates Triangulation for several 
 %            membrane potential series.
-%  CreateConfiguration - Creates a basic configuration for the 
+%  createConfiguration - Creates a basic configuration for the 
 %            MatCardiacMLab Simulator.
-%  CreateConfigurationAPDRateAdaptation - Creates configurations for the 
+%  createConfigurationAPDRateAdaptation - Creates configurations for the 
 %            MatCardiacMLab Simulator using the APD Rate Adaptation 
 %            protocol.
-%  CreateConfigurationSteadyState - Creates configurations for the 
+%  createConfigurationSteadyState - Creates configurations for the 
 %            MatCardiacMLab Simulator using the Steady State protocol.
-%  CreateModel - Creates a model for the simulator based on the file
+%  createModel - Creates a model for the simulator based on the file
 %            exported by COR to MatLab
-%  CreateModelStructure - Creates a model structure for the 
+%  createModelStructure - Creates a model structure for the 
 %            MatCardiacMLab simualtor 
+%  fitterExp - used to calculate the error of fit data to an 
+%            exponential function whith the form: A*exp(-t/B)+C
 %
 %-----------------------------------------------------------------------
 % 

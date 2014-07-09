@@ -29,7 +29,8 @@
 
 function SV0=runSimulationNoCell(configuration,model,options)
 
-[sv_save,cv_save,var2biomarker] = getIndexToSave(configuration,model);
+sv_save = getIndexToSave(configuration.sv_save,model,'sv_save');
+cv_save = getIndexToSave(configuration.cv_save,model,'cv_save');
 
 % Model information
 SV0 = model.SV0;

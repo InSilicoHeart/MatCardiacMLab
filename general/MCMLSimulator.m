@@ -68,9 +68,11 @@ end
 disp(['Model: ' model.Name])
 
 %options = odeset('RelTol',1e-12);
-%options = odeset('RelTol',1e-12,'MStateDependence','strong','BDF','on','MaxStep',1);
+%options = odeset('RelTol',1e-12,'MStateDependence','strong','BDF',...
+%                 'on','MaxStep',1);
 options = odeset('RelTol',1e-12,'MaxStep',1);
 
+% Depending on the Stimulation parameter, the run method is different
 if(ischar(configuration.Stimulation))
     Y0 = runSimulationChar(configuration,model,options);
 else if(iscell(configuration.Stimulation))

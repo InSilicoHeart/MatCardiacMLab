@@ -34,8 +34,14 @@
 %            MatCardiacMLab simualtor 
 %  rewriteModel - Saves model files with new state variables initial 
 %            values.
+%  showModels - Display the name of the models in a database and returns
+%            an struct with the models and the tags them.
 %  showStateVariables - Shows State Variable names on the screens and 
 %            returns a cell array with them.
+%
+%  RUN
+%
+%
 %
 %  OTHERS
 %

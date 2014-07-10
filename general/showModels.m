@@ -1,21 +1,23 @@
-%% CalculateAPD - Calculates one Action Potential Duration for different 
-%                 percentages of repolarization
+%% showModels - Display the name of the models in a database and returns
+%            an struct with the models and the tags them.
 %                                
 %
-%     [apd,time]=calculateAPD(values,t,perc)                                    
+%       [models,tags] = showModels(modelDB)                                    
 %                                                                                                                                                                                                  
 %    Input:                                                                 
-%      values: Vector with membrane potential values                        
-%      t:      Time vector for the action potential                         
-%      perc:   Percentage of repolarization (between 0 and 1)               
+%      modelDB: Name of the file where the database is saved or struct
+%               with the database.                        
 %                                                                           
 %    Output:                                                                
-%      apd:    Action Potential Duration of the APs in the value vector     
-%      time:   Instant of AP ending                                         
+%      models:  Struct with all the models of the database     
+%      tags:    Names of the models in the database                                         
 %
-%  ---------------------------------------------------------------------------
+%-----------------------------------------------------------------------
 % 
-% Electrophysiology Model Simulator (v00.00)
+% MatCardiacMLab (v00.00)
+%
+% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+% described in CellML files
 %
 % Jesus Carro Fernandez 
 % jcarro@usj.es  
@@ -24,15 +26,16 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/08
+% Last Modification 2014/07/10
 %
 
-function [models,tags] = ShowModels(model_input)
 
-if(ischar(model_input))
-    models = load(model_input);
+function [models,tags] = showModels(modelDB)
+
+if(ischar(modelDB))
+    models = load(modelDB);
 else
-    models = model_input;
+    models = modelDB;
 end
 
 tags = fieldnames(models);

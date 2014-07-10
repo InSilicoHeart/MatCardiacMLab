@@ -1,21 +1,22 @@
-%% CalculateAPD - Calculates one Action Potential Duration for different 
-%                 percentages of repolarization
-%                                
+%% showStateVariables - Shows State Variable names on the screens and 
+%            returns a cell array with them.
 %
-%     [apd,time]=calculateAPD(values,t,perc)                                    
+%       YNames = showStateVariables(modelDB,model)                                   
 %                                                                                                                                                                                                  
 %    Input:                                                                 
-%      values: Vector with membrane potential values                        
-%      t:      Time vector for the action potential                         
-%      perc:   Percentage of repolarization (between 0 and 1)               
+%      modelDB: Name of the data base where the model is saved or struct
+%               with a database.                   
+%      model:   String with the name of the model to show.                        
 %                                                                           
 %    Output:                                                                
-%      apd:    Action Potential Duration of the APs in the value vector     
-%      time:   Instant of AP ending                                         
+%      YNames:  Cell array with the State Variable Names
 %
-%  ---------------------------------------------------------------------------
+%-----------------------------------------------------------------------
 % 
-% Electrophysiology Model Simulator (v00.00)
+% MatCardiacMLab (v00.00)
+%
+% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+% described in CellML files
 %
 % Jesus Carro Fernandez 
 % jcarro@usj.es  
@@ -24,19 +25,20 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/08
+% Last Modification 2014/07/10
 %
 
-function YNames = ShowStateVariables(model_input,model)
+function YNames = showStateVariables(modelDB,model)
 
-if(ischar(model_input))
-    models = load(model_input);
+if(ischar(modelDB))
+    models = load(modelDB);
 else
-    models = model_input;
+    models = modelDB;
 end
 
 if(~isfield(models,model))
-    disp('Model not implemented')
+    disp(['Model ' model ' not implemented in this database'])
+    YNames = {};
 else
     SVNames = models.(model).SVNames;
     for i=1:length(SVNames)

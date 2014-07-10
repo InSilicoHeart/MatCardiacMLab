@@ -1,6 +1,6 @@
 %% MCMLSimulator - Core of the toolbox. Executes the simulations
 %
-%     Y = MCMLSimulator(configuration[,database])                                    
+%     SV = MCMLSimulator(configuration[,database])                                    
 %                                                                           
 %    Input:                                                                 
 %      configuration: Structure with a configuration created with the 
@@ -11,7 +11,7 @@
 %      database: Structure with model structures (optional).
 %                                                                           
 %    Output:                                                                
-%      Y:    State variables at the end of the simulation     
+%      SV:    State variables at the end of the simulation     
 %
 %-----------------------------------------------------------------------
 % 
@@ -30,7 +30,7 @@
 % Last Modification 2014/07/10
 %
 
-function Y0=MCMLSimulator(configuration,database)
+function SV=MCMLSimulator(configuration,database)
 
 disp(' ')
 tic
@@ -74,11 +74,11 @@ options = odeset('RelTol',1e-12,'MaxStep',1);
 
 % Depending on the Stimulation parameter, the run method is different
 if(ischar(configuration.Stimulation))
-    Y0 = runSimulationChar(configuration,model,options);
+    SV = runSimulationChar(configuration,model,options);
 else if(iscell(configuration.Stimulation))
-    Y0 = runSimulationCell(configuration,model,options);
+    SV = runSimulationCell(configuration,model,options);
     else
-        Y0 = runSimulationNoCell(configuration,model,options);
+        SV = runSimulationNoCell(configuration,model,options);
     end
 end
 

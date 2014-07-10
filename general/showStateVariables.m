@@ -38,8 +38,8 @@ end
 if(~isfield(models,model))
     disp('Model not implemented')
 else
-    YNames = models.(model).YNames;
-    for i=1:length(YNames)
-        disp([num2str(i) '. ' YNames{i}])
+    SVNames = models.(model).SVNames;
+    for i=1:length(SVNames)
+        disp([num2str(i) '. ' SVNames{i}])
     end
 end

@@ -23,7 +23,26 @@
 %      Output:      Name of the file where the results are stored.
 %      ConfigFile:  Name of the file where the configuration has to be 
 %                   saved (Optional).
-%                                                                           
+%        
+%   It's possible to define a sequence of simulations with different 
+%   parameters. To do this, put the vectors of Constants, Values, 
+%   Stimulation, sv_save and cv_save in a cell array. Each position of
+%   the array indicates one simulation.
+%
+%       Example:
+%         Model = 'Carro2011EPI';
+%         Constants = {{},{'A_NaK'}};
+%         Values = {[],[0.9]};
+%         DT = 0.1;
+%         Stimulation = {[0:1000:9000],[10000:1000:19000]};
+%         TimeEnd = 20000; % Global simulation end.
+%         sv_save = {{'V'},{'V'}};
+%         cv_save = {{},{'I_NaK'}};
+%         Output = 'OutputFile.mat';
+%         
+%         config = createConfiguration(Model,Constants,Values,DT,
+%                        Stimulation,Time,sv_save,cv_save,Output)
+%                                                                  
 %    Output:  
 %      config: Structure with the configuration of the simulation.
 %
@@ -53,7 +72,8 @@ function config = createConfiguration(Model,Constants,Values,DT,...
 
 if(length(Constants)~=length(Values))
   error('MatCardiacMLab:createConfiguration:InconsistentConstants',...
-     'Length of the Constants cell array is different from the length of Values')
+     ['Length of the Constants cell array is different from the ' ...
+     'length of Values'])
 end
 
 config.Model = Model;

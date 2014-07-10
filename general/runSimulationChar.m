@@ -1,21 +1,25 @@
-%% CalculateAPD - Calculates one Action Potential Duration for different 
-%                 percentages of repolarization
+%% runSimulationChar - Runs simulations for the predefined protocols
 %                                
 %
-%     [apd,time]=calculateAPD(values,t,perc)                                    
+%     SV0 = runSimulationChar(configuration,model,options)                                    
 %                                                                                                                                                                                                  
 %    Input:                                                                 
-%      values: Vector with membrane potential values                        
-%      t:      Time vector for the action potential                         
-%      perc:   Percentage of repolarization (between 0 and 1)               
+%      configuration: Structure with a configuration created with the 
+%                following methods:
+%                    - createConfigurationSteadyState
+%                    - createConfigurationAPDRateAdaptation
+%      model:         Structure with the model information
+%      options:       Integration options
 %                                                                           
 %    Output:                                                                
-%      apd:    Action Potential Duration of the APs in the value vector     
-%      time:   Instant of AP ending                                         
+%      SV:            State variables at the end of the simulation     
 %
-%  ---------------------------------------------------------------------------
+%-----------------------------------------------------------------------
 % 
-% Electrophysiology Model Simulator (v00.00)
+% MatCardiacMLab (v00.00)
+%
+% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+% described in CellML files
 %
 % Jesus Carro Fernandez 
 % jcarro@usj.es  
@@ -24,10 +28,10 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/08
+% Last Modification 2014/07/10
 %
 
-function SV0=runSimulationChar(configuration,model,options)
+function SV=runSimulationChar(configuration,model,options)
 
 disp(['Protocol: ' configuration.Stimulation])
 if(~isempty(configuration.Constants))
@@ -38,14 +42,14 @@ if(~isempty(configuration.Constants))
 end
   
 if(strcmp(configuration.Stimulation,'SteadyState'))
-    SV0=runSimulationSteadyState(configuration,model,options);
+    SV=runSimulationSteadyState(configuration,model,options);
     return;
 end
 
 if(strcmp(configuration.Stimulation,'APDRateAdaptation'))
-    SV0=runSimulationAPDRateAdaptation(configuration,model,options);
+    SV=runSimulationAPDRateAdaptation(configuration,model,options);
     return;
 end
 
 disp(['Protocol ' configuration.Stimulation ' not implemented yet.'])
-SV0=[];
+SV=[];

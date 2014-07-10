@@ -41,7 +41,7 @@
 %
 %  RUN
 %
-%
+%  runSimulationChar - Runs simulations for the predefined protocols
 %
 %  OTHERS
 %

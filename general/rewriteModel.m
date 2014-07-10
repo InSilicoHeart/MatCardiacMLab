@@ -1,21 +1,19 @@
-%% CalculateAPD - Calculates one Action Potential Duration for different 
-%                 percentages of repolarization
+%% rewriteModel - Saves model files with new state variables initial 
+%            values.
 %                                
 %
-%     [apd,time]=calculateAPD(values,t,perc)                                    
+%     rewriteModel(fileName, Y0)                                    
 %                                                                                                                                                                                                  
 %    Input:                                                                 
-%      values: Vector with membrane potential values                        
-%      t:      Time vector for the action potential                         
-%      perc:   Percentage of repolarization (between 0 and 1)               
-%                                                                           
-%    Output:                                                                
-%      apd:    Action Potential Duration of the APs in the value vector     
-%      time:   Instant of AP ending                                         
-%
-%  ---------------------------------------------------------------------------
+%      fileName: Name of the file where the model is saved
+%      Y0:       New initial conditions
+%                                                                                                            
+%-----------------------------------------------------------------------
 % 
-% Electrophysiology Model Simulator (v00.00)
+% MatCardiacMLab (v00.00)
+%
+% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+% described in CellML files
 %
 % Jesus Carro Fernandez 
 % jcarro@usj.es  
@@ -24,30 +22,46 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/08
+% Last Modification 2014/07/10
 %
 
-function rewriteModel(file_name, Y0)
+function rewriteModel(fileName, Y0)
 
 
-if(strcmp(file_name(end-1:end),'.m'))
-    file_name = file_name(1:end-2);
+if(strcmp(fileName(end-1:end),'.m'))
+    fileName = fileName(1:end-2);
 end
-model_extension = '.m';
+modelExtension = '.m';
 
-file = fopen([file_name model_extension]);
-A=char(fread(file)');
+file = fopen([fileName modelExtension]);
+code=char(fread(file)');
 fclose(file);
 
-ind=findstr(A,'% Y = ');
+% Find where the initial conditions are saved
+ind=findstr(code,'% Y = ');
 
-B1 = A(1:ind(1)-1);
-B2 = ['% Y = [' num2str(Y0(1)) num2str(Y0(2:end),',%10.5e') ']'];
-ind2 = findstr(A(ind(1)+1:end),']');
-B3 = A(ind2(1)+ind(1)+1:end);
+newCode = code(1:ind(1)-1);
 
-B= [B1 B2 B3];
-file = fopen([file_name model_extension],'w+');
-fwrite(file,B);
+%Save the new Y vector
+newCode = [newCode '% Y = [' ];
+
+% The first element is write without comma.
+if(length(Y0)<0)
+  newCode = [newCode num2str(Y0(1),'%10.5e'))];
+end
+
+for i=2:length(Y0)
+  newCode = [newCode ', '  num2str(Y0(i),'%10.5e')];
+end
+newCode = [newCode ']'];
+
+% Find the end of Y in the original code
+ind2 = findstr(code(ind(1)+1:end),']');
+% Add the rest of the code
+newCode = [newCode code(ind2(1)+ind(1)+1:end)];
+
+%Save the file
+file = fopen([fileName modelExtension],'w+');
+fwrite(file,newCode);
 fclose(file);
 

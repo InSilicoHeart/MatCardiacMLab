@@ -32,6 +32,8 @@
 %            exported by COR to MatLab
 %  createModelStructure - Creates a model structure for the 
 %            MatCardiacMLab simualtor 
+%  rewriteModel - Saves model files with new state variables initial 
+%            values.
 %
 %  OTHERS
 %

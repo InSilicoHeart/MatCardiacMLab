@@ -195,5 +195,5 @@ fwrite(newFile,newCode);
 fclose(newFile);
 
 % Creates the model structure
-model = CreateModelStructure(modelName,str2func(functionName),...
+model = createModelStructure(modelName,str2func(functionName),...
   SV0,SVNames,SVUnits,C0,CNames,CUnits,CVNames,CVUnits);

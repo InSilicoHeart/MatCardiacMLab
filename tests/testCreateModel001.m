@@ -3,7 +3,7 @@
 %                                
 %
 %     [result,msg] = testCreateModel001()         
-%                                                                                                                                                                                                  
+% 
 %                                                                           
 %    Output:                                                                
 %      result: True if the file has been created. False in other case
@@ -26,18 +26,21 @@
 %       
 % Last Modification 2014/07/11
 %
-
 function [result,msg] = testCreateModel001()
 
-modelFileInput = 'testFiles/Carro_Rodriguez_Laguna_Pueyo_2011_EPI.m';
-modelFileOutput = 'testResults/Carro_Rodriguez_Laguna_Pueyo_2011_EPI.m';
+pathInput = './testFiles';
+pathOutput = './testResults';
+modelFileInput = 'Carro_Rodriguez_Laguna_Pueyo_2011_EPI.m';
+modelFileOutput = modelFileInput;
 modelName = 'CRLP2011EPI';
-if(checkIfFileExists('.',modelFileOutput))
-  delete(['./' ConfigFile]);
+
+if(checkIfFileExists(pathOutput,modelFileOutput))
+  delete([pathOutput '/' modelFileOutput]);
 end
+
 try
-  model = CreateModel(modelFileInput,modelFileOutput,modelName);
-  result = checkIfFileExists('.',modelFileOutput)
+  model = createModel([pathInput '/' modelFileInput],[pathOutput '/' modelFileOutput],modelName);
+  result = checkIfFileExists(pathOutput,modelFileOutput);
   
   if(~result)
     msg = 'File not created';
@@ -47,6 +50,7 @@ cath ME
   disp(['Err:' ME ])
   result = false;
   msg = lasterr;
-  return;
+  return
 end
-msg = ['Created file ' ConfigFile];
+
+msg = ['Created file: ' modelFileOutput];

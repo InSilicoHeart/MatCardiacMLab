@@ -1,5 +1,5 @@
-%% testCreateModel001 - Creates a new model from a file that hasn't 
-%            been processed by MatCardiacMLab
+%% testCreateModel002 - Creates a new model from a file that has been 
+%            processed by MatCardiacMLab
 %                                
 %
 %     [result,msg] = testCreateModel001()         
@@ -28,17 +28,17 @@
 %
 function [result,msg] = testCreateModel001()
 
-pathInput = './testFiles';
+pathInput = './testResults';
 pathOutput = './testResults';
 modelFileInput = 'Carro_Rodriguez_Laguna_Pueyo_2011_EPI.m';
-modelFileOutput = modelFileInput;
+modelFileOutput = [modelFileInput(1:end-2) '_2.m'];
 modelName = 'CRLP2011EPI';
 
 if(checkIfFileExists(pathOutput,modelFileOutput))
   delete([pathOutput '/' modelFileOutput]);
 end
 
-try
+%try
   result = false;
   model = createModel([pathInput '/' modelFileInput],[pathOutput '/' modelFileOutput],modelName);
   result = checkIfFileExists(pathOutput,modelFileOutput);
@@ -47,11 +47,11 @@ try
     msg = 'File not created';
     return;
   end
-cath ME
-  disp(['Err:' ME ])
-  result = false;
-  msg = lasterr;
-  return
-end
+%cath ME
+%  disp(['Err:' ME ])
+%  result = false;
+%  msg = lasterr;
+%  return
+%end
 
 msg = ['Created file: ' modelFileOutput];

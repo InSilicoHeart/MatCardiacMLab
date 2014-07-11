@@ -2,8 +2,8 @@
 %            using only one stimulation vector (no cell of stimulations)
 %                                
 %
-%     SV=runSimulationNoCell(configuration,model,options)                                    
-%                                                                                                                                                                                                  
+%     SV=runSimulationNoCell(configuration,model,options)         
+%                                                                 
 %    Input:                                                                 
 %      configuration: Structure with a configuration created with the 
 %                     methods createConfiguration(). This configuration

@@ -41,11 +41,14 @@
 %
 %  RUN
 %
+%  runSimulationAPDRateAdaptation - Runs simulations for the predefined
+%            protocol APDRateAdaptation
+%  runSimulationCell - Runs simulations for the generic stimulation 
+%            using more than one stimulation vector (cell of 
+%            stimulations)
 %  runSimulationChar - Runs simulations for the predefined protocols
 %  runSimulationNoCell - Runs simulations for the generic stimulation 
 %            using only one stimulation vector (no cell of stimulations)
-%  runSimulationAPDRateAdaptation - Runs simulations for the predefined
-%            protocol APDRateAdaptation
 %  runSimulationSteadyState - Runs simulations for the predefined
 %            protocol SteadyState
 %

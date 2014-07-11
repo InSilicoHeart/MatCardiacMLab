@@ -1,21 +1,26 @@
-%% CalculateAPD - Calculates one Action Potential Duration for different 
-%                 percentages of repolarization
+%% runSimulationCell - Runs simulations for the generic stimulation 
+%            using more than one stimulation vector (cell of 
+%            stimulations)
 %                                
 %
-%     [apd,time]=calculateAPD(values,t,perc)                                    
-%                                                                                                                                                                                                  
+%     SV=runSimulationNoCell(configuration,model,options)         
+%                                                                 
 %    Input:                                                                 
-%      values: Vector with membrane potential values                        
-%      t:      Time vector for the action potential                         
-%      perc:   Percentage of repolarization (between 0 and 1)               
+%      configuration: Structure with a configuration created with the 
+%                     methods createConfiguration(). This configuration
+%                     stores more than one simulation in a cell
+%      model:         Structure with the model information
+%      options:       Integration options
 %                                                                           
 %    Output:                                                                
-%      apd:    Action Potential Duration of the APs in the value vector     
-%      time:   Instant of AP ending                                         
+%      SV:            State variables at the end of the simulation     
 %
-%  ---------------------------------------------------------------------------
+%-----------------------------------------------------------------------
 % 
-% Electrophysiology Model Simulator (v00.00)
+% MatCardiacMLab (v00.00)
+%
+% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+% described in CellML files
 %
 % Jesus Carro Fernandez 
 % jcarro@usj.es  
@@ -24,7 +29,7 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/08
+% Last Modification 2014/07/11
 %
 
 function SV0=runSimulationCell(configuration,model,options)

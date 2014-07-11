@@ -1,7 +1,7 @@
 %% runSimulationChar - Runs simulations for the predefined protocols
 %                                
 %
-%     SV0 = runSimulationChar(configuration,model,options)                                    
+%     SV = runSimulationChar(configuration,model,options)                                    
 %                                                                                                                                                                                                  
 %    Input:                                                                 
 %      configuration: Structure with a configuration created with the 

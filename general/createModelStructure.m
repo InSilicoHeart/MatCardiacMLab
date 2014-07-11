@@ -52,12 +52,12 @@ model.SV0 = SV0;
 model.SVNames = SVNames;
 model.SVUnits = SVUnits;
 
-if(length(SVNames)~=SVnum)
+if(length(SVNames)~=model.SVnum)
   error('MatCardiacMLab:createModelStructure:SVInconsistence',...
         'SVNames length doesn''t matcch SV length')
 end
 
-if(length(SVUnits)~=SVnum)
+if(length(SVUnits)~=model.SVnum)
   error('MatCardiacMLab:createModelStructure:SVInconsistence',...
         'SVUnits length doesn''t matcch SV length')
 end
@@ -67,12 +67,12 @@ model.C0 = C0;
 model.CNames = CNames;
 model.CUnits = CUnits;
 
-if(length(CNames)~=SVnum)
+if(length(CNames)~=model.Cnum)
   error('MatCardiacMLab:createModelStructure:ConstInconsistence',...
         'CNames length doesn''t matcch Const length')
 end
 
-if(length(CUnits)~=SVnum)
+if(length(CUnits)~=model.Cnum)
   error('MatCardiacMLab:createModelStructure:ConstInconsistence',...
         'CUnits length doesn''t matcch Const length')
 end
@@ -81,7 +81,7 @@ model.CVnum = length(CVNames);
 model.CVNames = CVNames;
 model.CVUnits = CVUnits;
 
-if(length(CUnits)~=SVnum)
+if(length(CUnits)~=model.CVnum)
   error('MatCardiacMLab:createModelStructure:CVInconsistence',...
         'CVUnits length doesn''t matcch CV length')
 end

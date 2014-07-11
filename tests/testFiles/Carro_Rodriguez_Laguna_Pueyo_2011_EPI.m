@@ -1,7 +1,7 @@
 %===============================================================================
 % CellML file:   Carro_Rodriguez_Laguna_Pueyo_2011_EPI.cellml
 % CellML model:  Carro_Rodriguez_Laguna_Pueyo_2011_EPI
-% Date and time: 11/07/2014 at 8:51:07
+% Date and time: 11/07/2014 at 11:17:33
 %-------------------------------------------------------------------------------
 % Conversion from CellML 1.0 to MATLAB (init) was done using COR (0.9.31.1409)
 %    Copyright 2002-2014 Dr Alan Garny

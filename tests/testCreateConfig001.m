@@ -63,6 +63,5 @@ cath ME
   msg = lasterr;
   return;
 end
-
 msg = ['Created file ' ConfigFile];
 

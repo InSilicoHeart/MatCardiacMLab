@@ -46,6 +46,8 @@
 %            using only one stimulation vector (no cell of stimulations)
 %  runSimulationAPDRateAdaptation - Runs simulations for the predefined
 %            protocol APDRateAdaptation
+%  runSimulationSteadyState - Runs simulations for the predefined
+%            protocol SteadyState
 %
 %  OTHERS
 %

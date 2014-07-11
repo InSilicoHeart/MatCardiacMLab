@@ -31,11 +31,11 @@
 %  createModel - Creates a model for the simulator based on the file
 %            exported by COR to MatLab
 %  createModelStructure - Creates a model structure for the 
-%            MatCardiacMLab simualtor 
+%            MatCardiacMLab simulator 
 %  rewriteModel - Saves model files with new state variables initial 
 %            values.
 %  showModels - Display the name of the models in a database and returns
-%            an struct with the models and the tags them.
+%            an structure with the models and the tags them.
 %  showStateVariables - Shows State Variable names on the screens and 
 %            returns a cell array with them.
 %
@@ -44,11 +44,13 @@
 %  runSimulationChar - Runs simulations for the predefined protocols
 %  runSimulationNoCell - Runs simulations for the generic stimulation 
 %            using only one stimulation vector (no cell of stimulations)
+%  runSimulationAPDRateAdaptation - Runs simulations for the predefined
+%            protocol APDRateAdaptation
 %
 %  OTHERS
 %
 %  fitterExp - used to calculate the error of fit data to an 
-%            exponential function whith the form: A*exp(-t/B)+C
+%            exponential function with the form: A*exp(-t/B)+C
 %
 %  getIndexToSave - Finds the numerical index of same variables from 
 %            their name inside a model

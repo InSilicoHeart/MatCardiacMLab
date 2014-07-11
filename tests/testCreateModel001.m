@@ -1,8 +1,8 @@
-%% testCreateConfig001 - Creates a new model from a file that hasn't 
+%% testCreateModel001 - Creates a new model from a file that hasn't 
 %            been processed by MatCardiacMLab
 %                                
 %
-%     [result,msg] = testCreateConfig001()         
+%     [result,msg] = testCreateModel001()         
 %                                                                                                                                                                                                  
 %                                                                           
 %    Output:                                                                
@@ -27,42 +27,26 @@
 % Last Modification 2014/07/11
 %
 
-function [result,msg] = testCreateConfig001()
+function [result,msg] = testCreateModel001()
 
-Model = 'Carro2011EPI';
-Constants = {};
-Values = [];
-DT = 0.1;
-Stimulation = [0:1000:9000];
-Time = 10000;
-sv_save = {};
-cv_save = {};
-path_save = ['testResults'];
-Output = ['testCreateConfig001_res.mat'];
-ConfigFile = ['testCreateConfig001_conf.mat'];
-
-if(checkIfFileExists(path_save,ConfigFile))
-  delete([path_save '/' ConfigFile]);
+modelFileInput = 'testFiles/Carro_Rodriguez_Laguna_Pueyo_2011_EPI.m';
+modelFileOutput = 'testResults/Carro_Rodriguez_Laguna_Pueyo_2011_EPI.m';
+modelName = 'CRLP2011EPI';
+if(checkIfFileExists('.',modelFileOutput))
+  delete(['./' ConfigFile]);
 end
-
 try
-  config = createConfiguration(Model,Constants,Values,DT,...
-                        Stimulation,Time,sv_save,cv_save,...
-                        [path_save '/' Output], ...
-                        [path_save '/' ConfigFile]);
-
-  result = checkIfFileExists(path_save,ConfigFile);
+  model = CreateModel(modelFileInput,modelFileOutput,modelName);
+  result = checkIfFileExists('.',modelFileOutput)
+  
   if(~result)
     msg = 'File not created';
     return;
   end
-
 cath ME
   disp(['Err:' ME ])
   result = false;
   msg = lasterr;
   return;
 end
-
 msg = ['Created file ' ConfigFile];
-

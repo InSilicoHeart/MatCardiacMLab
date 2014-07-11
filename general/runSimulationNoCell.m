@@ -31,7 +31,7 @@
 % Last Modification 2014/07/11
 %
 
-function SV=runSimulationNoCell(configuration,model,options)
+function SV0=runSimulationNoCell(configuration,model,options)
 
 sv_save = getIndexToSave(configuration.sv_save,model,'SVNames');
 cv_save = getIndexToSave(configuration.cv_save,model,'CVNames');

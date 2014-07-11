@@ -1,21 +1,25 @@
-%% CalculateAPD - Calculates one Action Potential Duration for different 
-%                 percentages of repolarization
+%% runSimulationNoCell - Runs simulations for the generic stimulation 
+%            using only one stimulation vector (no cell of stimulations)
 %                                
 %
-%     [apd,time]=calculateAPD(values,t,perc)                                    
+%     SV=runSimulationNoCell(configuration,model,options)                                    
 %                                                                                                                                                                                                  
 %    Input:                                                                 
-%      values: Vector with membrane potential values                        
-%      t:      Time vector for the action potential                         
-%      perc:   Percentage of repolarization (between 0 and 1)               
+%      configuration: Structure with a configuration created with the 
+%                     methods createConfiguration(). This configuration
+%                     only stores one simulation (no cell) 
+%      model:         Structure with the model information
+%      options:       Integration options
 %                                                                           
 %    Output:                                                                
-%      apd:    Action Potential Duration of the APs in the value vector     
-%      time:   Instant of AP ending                                         
+%      SV:            State variables at the end of the simulation     
 %
-%  ---------------------------------------------------------------------------
+%-----------------------------------------------------------------------
 % 
-% Electrophysiology Model Simulator (v00.00)
+% MatCardiacMLab (v00.00)
+%
+% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+% described in CellML files
 %
 % Jesus Carro Fernandez 
 % jcarro@usj.es  
@@ -24,10 +28,10 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/08
+% Last Modification 2014/07/11
 %
 
-function SV0=runSimulationNoCell(configuration,model,options)
+function SV=runSimulationNoCell(configuration,model,options)
 
 sv_save = getIndexToSave(configuration.sv_save,model,'SVNames');
 cv_save = getIndexToSave(configuration.cv_save,model,'CVNames');
@@ -46,6 +50,8 @@ dt=configuration.DT;
 numstim = 1;
 
 previousSteps = 0;
+
+%Look for the init and the end of the simulation
 tini = configuration.Stimulation(1);    
 if(length(configuration.Stimulation)>1)
     tfin = configuration.Stimulation(2);
@@ -54,7 +60,7 @@ else
 end
 nextStim = 1;
 
-
+% Check if tfin is out of the bounds of the simulation
 if(tfin>configuration.TimeEnd)
     tfin = configuration.TimeEnd;
 end
@@ -66,7 +72,7 @@ CV{1}.result=zeros(length(time{1}),length(cv_save));
 
 
 while (tini<configuration.TimeEnd)       
-    t=(tini:dt:tfin)-tini;
+    t=(tini:dt:tfin)-tini; % Each iteration puts time to 0
     steps = length(t);
     disp(['Stimulation ' num2str(numstim) ': ' num2str(tini) 'ms to ' num2str(tfin) 'ms'])
     [T,Y]=ode15s(mf,t,SV0,options,configuration.Constants,configuration.Values);
@@ -94,6 +100,7 @@ while (tini<configuration.TimeEnd)
     end
 
 
+	%Update variables to the next iteration
     previousSteps = previousSteps+steps-1;
 
     nextStim =nextStim +1;
@@ -113,6 +120,7 @@ while (tini<configuration.TimeEnd)
     end
 end
 
+% Save results
 SV{1}.resultNames = model.SVNames(sv_save);
 SV{1}.resultUnits = model.SVUnits(sv_save);
 

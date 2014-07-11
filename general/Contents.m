@@ -42,6 +42,8 @@
 %  RUN
 %
 %  runSimulationChar - Runs simulations for the predefined protocols
+%  runSimulationNoCell - Runs simulations for the generic stimulation 
+%            using only one stimulation vector (no cell of stimulations)
 %
 %  OTHERS
 %
@@ -66,5 +68,5 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/10
+% Last Modification 2014/07/11
 %

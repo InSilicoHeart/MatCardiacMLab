@@ -81,7 +81,7 @@ model.CVnum = length(CVNames);
 model.CVNames = CVNames;
 model.CVUnits = CVUnits;
 
-if(length(CUnits)~=model.CVnum)
+if(length(CVUnits)~=model.CVnum)
   error('MatCardiacMLab:createModelStructure:CVInconsistence',...
-        'CVUnits length doesn''t matcch CV length')
+        'CVUnits length doesn''t match CV length')
 end

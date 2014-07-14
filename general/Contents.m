@@ -67,7 +67,7 @@
 %
 %-----------------------------------------------------------------------
 % 
-% MatCardiacMLab (v00.00)
+% MatCardiacMLab
 %
 % Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
 % described in CellML files

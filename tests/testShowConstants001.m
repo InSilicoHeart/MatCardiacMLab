@@ -38,6 +38,7 @@ result = false;
 try 
   CNames = showConstants(modelDB,model);
   result = true;
+  msg = ['Constants shown'];
 cath ME
   disp(['Err:' ME ])
   result = false;

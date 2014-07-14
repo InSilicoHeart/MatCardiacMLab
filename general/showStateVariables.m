@@ -46,7 +46,7 @@ else
 
     disp(['State Variables in ' models.(model).Name ':'])
     for i=1:length(SVNames)
-        disp([num2str(i) '. ' SVNames{i} '(init: ' num2str(SV0(i)) ...
+        disp([num2str(i) '. ' SVNames{i} ' (init: ' num2str(SV0(i)) ...
 			'; units: ' SVUnits{i} ')'])
     end
 end

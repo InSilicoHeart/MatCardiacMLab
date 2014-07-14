@@ -45,6 +45,6 @@ else
 
     disp(['Computed Variables in ' models.(model).Name ':'])
     for i=1:length(CVNames)
-        disp([num2str(i) '. ' CVNames{i} '(units: ' CVUnits{i} ')'])
+        disp([num2str(i) '. ' CVNames{i} ' (units: ' CVUnits{i} ')'])
     end
 end

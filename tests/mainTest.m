@@ -1,11 +1,21 @@
-% mainTest - Main file for automatic unit tests
+%% mainTest - Main fail to do all the test to MatCardiacMLab
 %
-%==================================================
+%-----------------------------------------------------------------------
+% 
+% MatCardiacMLab
 %
-%                                    © Jesus Carro 
-%                                       2014/07/07
+% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+% described in CellML files
 %
-%==================================================
+% Jesus Carro Fernandez 
+% jcarro@usj.es  
+%                      
+% School of Engineering
+% San Jorge University 
+% www.usj.es  
+%       
+% Last Modification 2014/07/11
+%
 
 clc;
 clear all;

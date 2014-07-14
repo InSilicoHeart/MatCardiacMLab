@@ -90,7 +90,6 @@ while (tini<configuration.TimeEnd)
     % Evaluate Computed Variables
     ComVar = zeros(length(T),model.CVnum);
     if(length(cv_save)>0)
-        pos = find(tini==time{1});
         if(~isempty(pos))
             for j=1:steps
                 [dY,ComVar(j,:)] = mf(T(j),Y(j,:),configuration.Constants,configuration.Values);

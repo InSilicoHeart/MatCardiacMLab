@@ -39,24 +39,27 @@ options = optimset('LargeScale','off','Display','off','MaxFunEvals',5000,...
                    'DiffMinChange',1e-12);
 
 nCLs = length(t);
+tauS = zeros(1,length(values(1,:)));
+tauF = zeros(1,length(values(1,:)));
 
-%Find the initial point after a minimum in the first 100 APDs
-j=2:min(100,nCLs);
-begin=find(diff(values(j-1))>0 & diff(values(j))<=0);
-if(isempty(begin))
-  begin=0;
-end
-val2fit = values(begin+1:end);
+for i=1:length(values(1,:))
+  %Find the initial point after a minimum in the first 100 APDs
+  j=2:min(100,nCLs);
+  begin=find(diff(values(j-1,i))>0 & diff(values,i(j))<=0);
+  if(isempty(begin))
+    begin=0;
+  end
+  val2fit = values(begin+1:end,i);
 
-% Initial values
-x0 = [val2fit(1)-val2fit(end);105;val2fit(end)];
-% Limits
-inf_limit = [-Inf; 1e-17; -Inf];
-sup_limit = [Inf; Inf; Inf];
-data = [t' val2fit];
+  % Initial values
+  x0 = [val2fit(1)-val2fit(end);105;val2fit(end)];
+  % Limits
+  inf_limit = [-Inf; 1e-17; -Inf];
+  sup_limit = [Inf; Inf; Inf];
+  data = [t' val2fit];
 
-x = fmincon(@fitterExp,x0,[],[],[],[],...
+  x = fmincon(@fitterExp,x0,[],[],[],[],...
     inf_limit,sup_limit,[],options,data);
 
-tauS = x(2);
-tauF = [];
+  tauS(i) = x(2);
+end

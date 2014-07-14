@@ -27,7 +27,7 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/11
+% Last Modification 2014/07/14
 %
 
 function SV0=runSimulationAPDRateAdaptation(configuration,model,options)
@@ -143,32 +143,8 @@ for i=1:nCLs2
     tfin = (i+1)*CL2+nCLs1*CL1;
 end
 
-
-% Get tau_f and tau_s 
-% ----- Create a function por this part -----
-options = optimset('LargeScale','off','Display','off','MaxFunEvals',5000,...
-                   'TolX',1e-12,'TolFun',1e-12,'TolCon',1e-12,'DiffMaxChange',0.5,...
-                   'DiffMinChange',1e-12);
-
-j=2:min(100,nCLs2);
-apd90_tau=apd90(nCLs1+1:end);
-begin=find(diff(apd90_tau(j-1))>0 & diff(apd90_tau(j))<=0);
-if(isempty(begin))
-  begin=0;
-end
-apd2fit = apd90_tau(begin+1:end);
-
-x0 = [apd2fit(1)-apd2fit(end);105;apd2fit(end)];
-inf_limit = [-Inf; 1e-17; -Inf];
-sup_limit = [Inf; Inf; Inf];
-time = (begin+1)*0.6:0.6:length(apd90_tau)*0.6;
-data = [time' apd2fit];
-
-x = fmincon(@fitter_exp,x0,[],[],[],[],...
-    inf_limit,sup_limit,[],options,data);
-
-tau_slow = x(2);
-% -------------------------------------------
+% Calculate APD Rate Adaptation Biomarkers
+[tauF,tauS]=calculateTaus(apd90(nCLs1:nCLs1+nCLs2,:),[0:nCLs2]*CL2);
 
 
 % Save results
@@ -184,10 +160,13 @@ for i=1:length(apd90_sv)
   APD90{1}.resultUnits(i) = 'ms';
 end
 
-tauSlow{1}.result = tau_slow;
-tauSlow{1}.resultNames = model.SVNames(apd90_sv);
+tauSlow{1}.result = tauS;
+tauFast{1}.result = tauF;
 for i=1:length(apd90_sv)
-  tauSlow{1}.resultUnits(i) = 's';
+  tauSlow{1}.resultNames{i} = model.SVNames(apd90_sv);
+  tauSlow{1}.resultUnits{i}= 's';
+  tauFast{1}.resultNames{i} = model.SVNames(apd90_sv);
+  tauFast{1}.resultUnits{i}= 's';
 end
 
-save(configuration.Output,'time','SV','CV','APD90','tauSlow')
+save(configuration.Output,'time','SV','CV','APD90','tauSlow','tauFast')

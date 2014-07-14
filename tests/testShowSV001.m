@@ -1,11 +1,11 @@
-%% testShowConstants001 - Show the Model Constants of the Carro2011EPI
+%% testShowSV001 - Show the Model State Variables of the Carro2011EPI
 %            model
 %                                
 %
-%     [result,msg] = testShowConstants001()         
-%                                                                                                                                                                                                  
-%                                                                           
-%    Output:                                                                
+%     [result,msg] = testShowSV001()
+% 
+% 
+%    Output: 
 %      result: True if the method executes without problems. False in 
 %              other case
 %      msg:    Explanation of the result
@@ -28,7 +28,7 @@
 % Last Modification 2014/07/14
 %
 
-function [result,msg] = testShowConstants001()
+function [result,msg] = testShowSV001()
 
 model = 'Carro2011EPI';
 modelDB = 'MatCardiacMLabDB.mat';
@@ -36,9 +36,9 @@ modelDB = 'MatCardiacMLabDB.mat';
 result = false;
 
 try 
-  CNames = showConstants(modelDB,model);
+  CNames = showStateVariables(modelDB,model);
   result = true;
-  msg = ['Constants shown'];
+  msg = ['State Variables shown'];
 cath ME
   disp(['Err:' ME ])
   result = false;

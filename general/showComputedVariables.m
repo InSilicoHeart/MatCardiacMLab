@@ -28,7 +28,7 @@
 % Last Modification 2014/07/14
 %
 
-function YNames = showComputedVariables(modelDB,model)
+function CVNames = showComputedVariables(modelDB,model)
 
 if(ischar(modelDB))
     models = load(modelDB);
@@ -38,7 +38,7 @@ end
 
 if(~isfield(models,model))
     disp(['Model ' model ' not implemented in this database'])
-    YNames = {};
+    CVNames = {};
 else
     CVNames = models.(model).CVNames;
 	CVUnits = models.(model).CVUnits;

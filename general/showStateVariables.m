@@ -9,7 +9,7 @@
 %      model:   String with the name of the model to show.                        
 %                                                                           
 %    Output:                                                                
-%      YNames:  Cell array with the State Variable Names
+%      SVNames:  Cell array with the State Variable Names
 %
 %-----------------------------------------------------------------------
 % 
@@ -28,7 +28,7 @@
 % Last Modification 2014/07/14
 %
 
-function YNames = showStateVariables(modelDB,model)
+function SVNames = showStateVariables(modelDB,model)
 
 if(ischar(modelDB))
     models = load(modelDB);
@@ -38,7 +38,7 @@ end
 
 if(~isfield(models,model))
     disp(['Model ' model ' not implemented in this database'])
-    YNames = {};
+    SVNames = {};
 else
     SVNames = models.(model).SVNames;
     SV0 = models.(model).SV0;

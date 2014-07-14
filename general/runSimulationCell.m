@@ -29,21 +29,18 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/11
+% Last Modification 2014/07/14
 %
 
 function SV0=runSimulationCell(configuration,model,options)
 
-if(length(configuration.sv_save)<1)
-    sv_save = [];
-else
-    sv_save = cell(length(configuration.sv_save));
-    for i=1:length(sv_save)
-        sv_save{i} = zeros(length(configuration.sv_save{i}),1);
-        for j=1:length(configuration.sv_save{i})
-            sv_save{i}(j)=find(strcmp(model.SVNames,configuration.sv_save{i}{j}),1);
-        end
-    end
+
+% Find sv index in the model
+sv_save = cell(size(configuration.sv_save));
+cv_save = cell(size(configuration.cv_save));
+for i=1:length(sv_save)
+  sv_save{i} = getIndexToSave(configuration.sv_save{i},model,'SVNames');
+  cv_save{i} = getIndexToSave(configuration.cv_save{i},model,'CVNames');
 end
 
 simulations = struct('Constants',{configuration.Constants},...
@@ -53,12 +50,13 @@ simulations = struct('Constants',{configuration.Constants},...
                      'TimeEnd',configuration.TimeEnd,...
                      'sv_save',{sv_save});
 
-
+%Model Information
 SV0 = model.SV0;
 mf = model.mf;
-results = cell(size(simulations));
-result_names = cell(size(simulations));
-result_units = cell(size(simulations));
+
+%Cells to save results
+SV = cell(size(simulations));
+CV = cell(size(simulations));
 time = cell(size(simulations));
 
 dt=simulations.DT;
@@ -70,41 +68,42 @@ for i=1:length(simulations.Stimulation)
     previousSteps = 0;
     nextStim = 1;
     
+    % Look for the init and the end of the simulation
     tini = simulations.Stimulation{i}(1);  
     if(length(simulations.Stimulation{i})>1)
         tfin = simulations.Stimulation{i}(2);
     else if(length(simulations.Stimulation)>i)
             tfin = simulations.Stimulation{i+1}(1);
         else
-            tfin = simulations.Time;
+            tfin = simulations.TimeEnd;
         end
     end
 
-
+	% Get the time vector of the stimulation group
     if(length(simulations.Stimulation)>i)
         time{i}=tini:dt:simulations.Stimulation{i+1};
     else
-        time{i}=tini:dt:simulations.Time;
+        time{i}=tini:dt:simulations.TimeEnd;
     end
         
+    % Get first tfin (end of the first stimulation)
     if(i<length(simulations.Stimulation))
         if(tfin>simulations.Stimulation{i+1}(1))
             tfin = simulations.Stimulation{i+1}(1);
         end
     else
-        if(tfin>simulations.Time)
-            tfin = simulations.Time;
+        if(tfin>simulations.TimeEnd)
+            tfin = simulations.TimeEnd;
         end
     end
     
-    % In simulations with different parts, the variables that can be saved can be different
-    if(iscell(simulations.sv_save))
-        sv_save = simulations.sv_save{i};
-    else
-        sv_save = simulations.sv_save;
-    end
-
-    results{i}=zeros(length(time{i}),length(sv_save));
+    % In simulations with different parts, the variables that has to be 
+    % saved are deffined in different elements of a cell array
+    sv_save = simulations.sv_save{i};
+	cv_save = simulations.cv_save{i};
+    
+    SV{i}.result=zeros(length(time{i}),length(sv_save));
+    CV{i}.result=zeros(length(time{i}),length(cv_save));
 
     while (tini<time{i}(end))       
         t=(tini:dt:tfin)-tini;
@@ -115,8 +114,25 @@ for i=1:length(simulations.Stimulation)
 
         numstim = numstim + 1;
         SV0=Y(end,:);
-        results{i}(previousSteps+1:previousSteps+steps,:)=Y(:,sv_save);
-
+        
+        % Save State Variable
+        pos = find(tini==time{i});
+		if(~isempty(pos))
+			SV{i}.result(pos:pos+steps-1,:)=Y(:,sv_save);
+		end
+		
+		% Evaluate Computed Variables
+		ComVar = zeros(length(T),model.CVnum);
+		if(length(cv_save)>0)
+			if(~isempty(pos))
+				for j=1:steps
+					[dY,ComVar(j,:)] = mf(T(j),Y(j,:),simulations.Constants{i},simulation.Values{i});
+				end
+				CV{i}.result(pos:pos+steps-1,:)=ComVar(:,cv_save);
+			end
+		end
+	
+		%Update variables to the next iteration
         previousSteps = previousSteps+steps-1;
 
         nextStim =nextStim +1;
@@ -129,7 +145,7 @@ for i=1:length(simulations.Stimulation)
             if(i<length(simulations.Stimulation))
                 tfin= simulations.Stimulation{i+1}(1);
             else
-                tfin= simulations.Time;
+                tfin= simulations.TimeEnd;
             end
         else
             tfin = simulations.Stimulation{i}(nextStim+1);
@@ -137,10 +153,14 @@ for i=1:length(simulations.Stimulation)
         
     end
     
+	% Save results
+	SV{i}.resultNames = model.SVNames(sv_save);
+	SV{i}.resultUnits = model.SVUnits(sv_save);
 
-    result_names{i} = model.SVNames(sv_save);
-    result_units{i} = model.SVUnits(sv_save);
+	CV{i}.resultNames = model.CVNames(cv_save);
+	CV{i}.resultUnits = model.CVUnits(cv_save);
+
 end
 
 
-save(configuration.Output,'time','results','result_names','result_units')
+save(configuration.Output,'time','SV','CV')

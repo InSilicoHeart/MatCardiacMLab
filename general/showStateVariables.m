@@ -42,7 +42,7 @@ if(~isfield(models,model))
 else
     SVNames = models.(model).SVNames;
     SV0 = models.(model).SV0;
-	SVUnits = models.(model).SVUnits;
+    SVUnits = models.(model).SVUnits;
 
     disp(['State Variables in ' models.(model).Name ':'])
     for i=1:length(SVNames)

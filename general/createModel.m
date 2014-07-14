@@ -189,8 +189,7 @@ end
 EOFStr=[sepDoubleLine CRLF '% End of file' CRLF sepDoubleLine];
 indEOF = findstr(newCode,EOFStr);
 if(isempty(indEOF))
-  me = MException('MatCardiacMLab:createModel:EOFNotFound','End of file pattern not found');
-  throw(me);
+  error('MatCardiacMLab:createModel:EOFNotFound','End of file pattern not found');
 end
 indEOF = indEOF + length(EOFStr)-1;
 

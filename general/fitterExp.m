@@ -30,7 +30,7 @@
 %
 
 
-function f = fitter_exp(x,data)
+function f = fitterExp(x,data)
 t=data(:,1);
 expon=x(1)*exp(-t/x(2))+x(3);
 

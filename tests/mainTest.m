@@ -14,7 +14,7 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/11
+% Last Modification 2014/07/14
 %
 
 clc;
@@ -33,7 +33,7 @@ disp(' ')
 %tests = struct('functionHandle',[],'name',{},'expectedValue',{});
 
 mkdir('testResults')
-tests = [modelTests() configurationTests() runTests()];
+tests = [modelTests() configurationTests() showTests() runTests() ];
 
 results = false(size(tests));
 

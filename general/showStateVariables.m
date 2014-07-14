@@ -25,7 +25,7 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/10
+% Last Modification 2014/07/14
 %
 
 function YNames = showStateVariables(modelDB,model)
@@ -41,7 +41,12 @@ if(~isfield(models,model))
     YNames = {};
 else
     SVNames = models.(model).SVNames;
+    SV0 = models.(model).SV0;
+	SVUnits = models.(model).SVUnits;
+
+    disp(['State Variables in ' models.(model).Name ':'])
     for i=1:length(SVNames)
-        disp([num2str(i) '. ' SVNames{i}])
+        disp([num2str(i) '. ' SVNames{i} '(init: ' num2str(SV0(i)) ...
+			'; units: ' SVUnits{i} ')'])
     end
 end

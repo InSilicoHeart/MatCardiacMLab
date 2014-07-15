@@ -24,6 +24,7 @@
 - Run Matlab and execute:
 >> MATCARDIACLAB_PATH = <MATCARDIACLAB_PATH>
 >> addpath([MATCARDIACLAB_PATH '/general:' MATCARDIACLAB_PATH'/models'])
+>> savepath
 
 
 ========================================================================

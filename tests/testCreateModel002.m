@@ -2,7 +2,7 @@
 %            processed by MatCardiacMLab
 %                                
 %
-%     [result,msg] = testCreateModel001()         
+%     [result,msg] = testCreateModel002()         
 % 
 %                                                                           
 %    Output:                                                                
@@ -24,7 +24,7 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/11
+% Last Modification 2014/07/15
 %
 function [result,msg] = testCreateModel001()
 

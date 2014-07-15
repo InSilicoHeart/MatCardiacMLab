@@ -1,0 +1,34 @@
+------------------------------------------------------------------------
+ 
+ MatCardiacMLab (https://github.com/ChusCarro/MatCardiacMLab)
+
+ Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+ described in CellML files
+
+ Jesus Carro Fernandez 
+ jcarro@usj.es  
+                      
+ School of Engineering
+ San Jorge University 
+ www.usj.es  
+       
+------------------------------------------------------------------------
+
+========================================================================
+   INSTALL
+========================================================================
+
+- Extract the zip file in the folder you want to save 
+(<MATCARDIACLAB_PATH>)
+
+- Run Matlab and execute:
+>> MATCARDIACLAB_PATH = <MATCARDIACLAB_PATH>
+>> addpath([MATCARDIACLAB_PATH '/general:' MATCARDIACLAB_PATH'/models'])
+
+
+========================================================================
+   HELP
+========================================================================
+
+- Run MatLab help:
+>> help general

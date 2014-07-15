@@ -27,39 +27,33 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/14
+% Last Modification 2014/07/15
 %
 
 function [tauF,tauS]=calculateTaus(values,t)
 
-warning('MatCardiacMLab:calculateTaus:TauF','TauF calculations not implemented yet')
-
 options = optimset('LargeScale','off','Display','off','MaxFunEvals',5000,...
                    'TolX',1e-12,'TolFun',1e-12,'TolCon',1e-12,'DiffMaxChange',0.5,...
-                   'DiffMinChange',1e-12);
+                   'DiffMinChange',1e-12,'Algorithm','active-set');
 
 nCLs = length(t);
 tauS = zeros(1,length(values(1,:)));
 tauF = zeros(1,length(values(1,:)));
 
 for i=1:length(values(1,:))
-  %Find the initial point after a minimum in the first 100 APDs
-  j=2:min(100,nCLs);
-  begin=find(diff(values(j-1,i))>0 & diff(values,i(j))<=0);
-  if(isempty(begin))
-    begin=0;
-  end
-  val2fit = values(begin+1:end,i);
+  val2fit = values(:,i);
 
   % Initial values
-  x0 = [val2fit(1)-val2fit(end);105;val2fit(end)];
+  x0 = [(val2fit(1)-val2fit(end))/2;(val2fit(1)-val2fit(end))/2;val2fit(end);10;100];
   % Limits
-  inf_limit = [-Inf; 1e-17; -Inf];
-  sup_limit = [Inf; Inf; Inf];
+  inf_limit = [-Inf; -Inf; -Inf; 1e-17; 1e-17];
+  sup_limit = [Inf; Inf; Inf; Inf; Inf];
+
   data = [t' val2fit];
 
-  x = fmincon(@fitterExp,x0,[],[],[],[],...
+  x = fmincon(@fitterDoubleExp,x0,[],[],[],[],...
     inf_limit,sup_limit,[],options,data);
 
-  tauS(i) = x(2);
+  tauF(i) = min(x(4:5));
+  tauS(i) = max(x(4:5));
 end

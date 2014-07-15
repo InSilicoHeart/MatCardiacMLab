@@ -33,7 +33,7 @@ disp(' ')
 %tests = struct('functionHandle',[],'name',{},'expectedValue',{});
 
 mkdir('testResults')
-tests = [modelTests() configurationTests() showTests() runTests() ];
+tests = [modelTests() configurationTests() showTests() biomarkerTests() runTests() ];
 
 results = false(size(tests));
 

@@ -38,7 +38,7 @@ if(checkIfFileExists(pathOutput,modelFileOutput))
   delete([pathOutput '/' modelFileOutput]);
 end
 
-%try
+try
   result = false;
   model = createModel([pathInput '/' modelFileInput],[pathOutput '/' modelFileOutput],modelName);
   result = checkIfFileExists(pathOutput,modelFileOutput);
@@ -47,11 +47,11 @@ end
     msg = 'File not created';
     return;
   end
-%cath ME
-%  disp(['Err:' ME ])
-%  result = false;
-%  msg = lasterr;
-%  return
-%end
+cath ME
+  disp(['Err:' ME ])
+  result = false;
+  msg = lasterr;
+  return
+end
 
 msg = ['Created file: ' modelFileOutput];

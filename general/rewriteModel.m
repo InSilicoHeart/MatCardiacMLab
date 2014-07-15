@@ -46,12 +46,12 @@ newCode = code(1:ind(1)-1);
 newCode = [newCode '% Y = [' ];
 
 % The first element is write without comma.
-if(length(Y0)<0)
-  newCode = [newCode num2str(Y0(1),'%10.5e'))];
+if(length(Y0)>0)
+  newCode = [newCode num2str(Y0(1),'%10.6e')];
 end
 
 for i=2:length(Y0)
-  newCode = [newCode ', '  num2str(Y0(i),'%10.5e')];
+  newCode = [newCode ', '  num2str(Y0(i),'%10.6e')];
 end
 newCode = [newCode ']'];
 

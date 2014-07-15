@@ -1,4 +1,4 @@
-%% fitterExp - used to calculate the error of fit data to an 
+%% fitterExp - used to calculate the error of fit data to an double
 %            exponential function whith the form:
 %                 A1*exp(-t/tau1)+A2*exp(-t/tau2)+A3
 %                                

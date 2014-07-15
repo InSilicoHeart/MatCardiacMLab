@@ -58,9 +58,8 @@
 %
 %  OTHERS
 %
-%  fitterExp - used to calculate the error of fit data to an 
-%            exponential function with the form: A*exp(-t/B)+C
-%
+%  fitterExp - used to calculate the error of fit data to an double
+%            exponential function
 %  getIndexToSave - Finds the numerical index of same variables from 
 %            their name inside a model
 %

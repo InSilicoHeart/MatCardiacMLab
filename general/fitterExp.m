@@ -1,12 +1,12 @@
-%% fitterExp - used to calculate the error of fit data to an double
-%            exponential function whith the form:
-%                 A1*exp(-t/tau1)+A2*exp(-t/tau2)+A3
+%% fitterExp - used to calculate the error of fit data to an exponential
+%            function whith the form:
+%                 A1*exp(-t/tau1)+A2
 %                                
 %
-%     f = fitterDoubleExp(x,data)                                    
+%     f = fitterExp(x,data)                                    
 %                                                                                                                                                                                                  
 %    Input:                                                                 
-%      x:      Vector with the values of A1, A2, A3, tau1 and tau2.
+%      x:      Vector with the values of A1, A2, and tau1.
 %      data:   Matrix whith the value of time and the data to fit in the
 %              first and the second column respectively.               
 %                                                                           
@@ -27,12 +27,12 @@
 % San Jorge University 
 % www.usj.es  
 %       
-% Last Modification 2014/07/09
+% Last Modification 2014/07/16
 %
 
 
-function f = fitterDoubleExp(x,data)
+function f = fitterDouble(x,data)
 t=data(:,1);
-expon=x(1)*exp(-t/x(4))+x(2)*exp(-t/x(5))+x(3);
+expon=x(1)*exp(-t/x(3))+x(2);
 
 f=sum((data(:,2)-expon).^2);

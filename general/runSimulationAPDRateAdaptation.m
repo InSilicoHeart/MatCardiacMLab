@@ -64,6 +64,7 @@ else
 end
 
 SV{1}.result=zeros(length(time{1}),length(sv_save));
+CV{1}.result=zeros(length(time{1}),length(cv_save));
 
 
 % Runing the first part
@@ -144,7 +145,8 @@ for i=1:nCLs2
 end
 
 % Calculate APD Rate Adaptation Biomarkers
-[tauF,tauS]=calculateTaus(apd90(nCLs1:nCLs1+nCLs2,:),[0:nCLs2]*CL2);
+[tauF,tauS]=calculateTaus(apd90(nCLs1+1:nCLs1+nCLs2,:),...
+              [0:nCLs2-1]'*CL2/1000); %CL2 is in ms but time has to be in s.
 
 
 % Save results
@@ -157,7 +159,7 @@ CV{1}.resultUnits = model.CVUnits(cv_save);
 APD90{1}.result = apd90;
 APD90{1}.resultNames = model.SVNames(apd90_sv);
 for i=1:length(apd90_sv)
-  APD90{1}.resultUnits(i) = 'ms';
+  APD90{1}.resultUnits{i} = 'ms';
 end
 
 tauSlow{1}.result = tauS;

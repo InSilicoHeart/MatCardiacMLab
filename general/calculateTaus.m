@@ -32,9 +32,7 @@
 
 function [tauF,tauS]=calculateTaus(values,t)
 
-options = optimset('LargeScale','off','Display','off','MaxFunEvals',5000,...
-                   'TolX',1e-12,'TolFun',1e-12,'TolCon',1e-12,'DiffMaxChange',0.5,...
-                   'DiffMinChange',1e-12,'Algorithm','active-set');
+options = optimset('MaxFunEvals',5000,'MaxIter',5000,'Algorithm','active-set','Display','iter');
 
 nCLs = length(t);
 tauS = zeros(1,length(values(1,:)));
@@ -43,17 +41,29 @@ tauF = zeros(1,length(values(1,:)));
 for i=1:length(values(1,:))
   val2fit = values(:,i);
 
+  %% Initial values
+  %x0 = [(val2fit(1)-val2fit(end))/2;(val2fit(1)-val2fit(end))/2;val2fit(end);10;100];
+  %% Limits
+  %inf_limit = [-Inf; -Inf; -Inf; 1e-17; 1e-17];
+  %sup_limit = [Inf; Inf; Inf; Inf; Inf];
+  %
+  %data = [t val2fit];
+  %
+  %x = fmincon(@fitterDoubleExp,x0,[],[],[],[],...
+  %  inf_limit,sup_limit,[],options,data)
+
   % Initial values
-  x0 = [(val2fit(1)-val2fit(end))/2;(val2fit(1)-val2fit(end))/2;val2fit(end);10;100];
+  x0 = [val2fit(1)-val2fit(end);val2fit(end);100];
   % Limits
-  inf_limit = [-Inf; -Inf; -Inf; 1e-17; 1e-17];
-  sup_limit = [Inf; Inf; Inf; Inf; Inf];
+  inf_limit = [-Inf; -Inf; 1e-17];
+  sup_limit = [Inf; Inf; Inf];
+  
+  desp = 20;
+  data = [t(desp:end,1) val2fit(desp:end,1)];
+  
+  x = fmincon(@fitterExp,x0,[],[],[],[],...
+    inf_limit,sup_limit,[],options,data)
 
-  data = [t' val2fit];
-
-  x = fmincon(@fitterDoubleExp,x0,[],[],[],[],...
-    inf_limit,sup_limit,[],options,data);
-
-  tauF(i) = min(x(4:5));
-  tauS(i) = max(x(4:5));
+  tauF(i) = -(t(2)-t(1))/(log(values(2))-log(values(1)));
+  tauS(i) = x(3);
 end

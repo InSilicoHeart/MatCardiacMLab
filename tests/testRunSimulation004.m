@@ -1,3 +1,21 @@
+% Add help !!!
+%-----------------------------------------------------------------------
+% 
+% MatCardiacMLab
+%
+% Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
+% described in CellML files
+%
+% https://github.com/ChusCarro/MatCardiacMLab/
+%
+%
+% Jesus Carro Fernandez 
+% jcarro@usj.es  
+%                      
+% School of Engineering
+% San Jorge University 
+% www.usj.es  
+%
 function [result,msg] = testRunSimulation004()
 
 path_save = 'testResults';
@@ -6,7 +24,7 @@ ConfigFile = ['testCreateConfig004_conf.mat'];
 
 delete([path_save '/' Output]);
 
-%try
+try
   MCMLSimulator([path_save '/' ConfigFile]);
   file = dir(path_save);
   result = false;
@@ -22,11 +40,11 @@ delete([path_save '/' Output]);
     return;
   end
 
-%catch ME
-%  result = false;
-%  msg = ME.message;
-%  return;
-%end
+catch ME
+  result = false;
+  msg = ME.message;
+  return;
+end
 
 msg = ['Computed file ' ConfigFile];
 

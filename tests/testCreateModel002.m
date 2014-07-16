@@ -12,10 +12,13 @@
 %
 %-----------------------------------------------------------------------
 % 
-% MatCardiacMLab (v00.00)
+% MatCardiacMLab
 %
 % Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
 % described in CellML files
+%
+% https://github.com/ChusCarro/MatCardiacMLab/
+%
 %
 % Jesus Carro Fernandez 
 % jcarro@usj.es  
@@ -23,8 +26,6 @@
 % School of Engineering
 % San Jorge University 
 % www.usj.es  
-%       
-% Last Modification 2014/07/15
 %
 function [result,msg] = testCreateModel001()
 

@@ -128,7 +128,7 @@ for i=1:length(simulations.Stimulation)
 		if(length(cv_save)>0)
 			if(~isempty(pos))
 				for j=1:steps
-					[dY,ComVar(j,:)] = mf(T(j),Y(j,:),simulations.Constants{i},simulation.Values{i});
+					[dY,ComVar(j,:)] = mf(T(j),Y(j,:),simulations.Constants{i},simulations.Values{i});
 				end
 				CV{i}.result(pos:pos+steps-1,:)=ComVar(:,cv_save);
 			end

@@ -48,7 +48,8 @@ simulations = struct('Constants',{configuration.Constants},...
                      'DT',configuration.DT,...
                      'Stimulation',{configuration.Stimulation},...
                      'TimeEnd',configuration.TimeEnd,...
-                     'sv_save',{sv_save});
+                     'sv_save',{sv_save},...
+                     'cv_save',{cv_save});
 
 %Model Information
 SV0 = model.SV0;
@@ -100,7 +101,7 @@ for i=1:length(simulations.Stimulation)
     % In simulations with different parts, the variables that has to be 
     % saved are deffined in different elements of a cell array
     sv_save = simulations.sv_save{i};
-	cv_save = simulations.cv_save{i};
+    cv_save = simulations.cv_save{i};
     
     SV{i}.result=zeros(length(time{i}),length(sv_save));
     CV{i}.result=zeros(length(time{i}),length(cv_save));

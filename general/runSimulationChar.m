@@ -21,14 +21,15 @@
 % Matlab toolbox to Simulate Electrophysiologycal Cardiac Models 
 % described in CellML files
 %
+% https://github.com/ChusCarro/MatCardiacMLab/
+%
+%
 % Jesus Carro Fernandez 
 % jcarro@usj.es  
 %                      
 % School of Engineering
 % San Jorge University 
 % www.usj.es  
-%       
-% Last Modification 2014/07/10
 %
 
 function SV=runSimulationChar(configuration,model,options)

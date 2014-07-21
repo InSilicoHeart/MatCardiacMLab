@@ -67,8 +67,11 @@ numstim = 1;
 
 for i=1:length(simulations.Stimulation)
     disp(['--- Part ' num2str(i) ' ---'])
-    for j=1:length(simulations.Stimulation{i}.Constants)
-      disp(['    ' simulations.Stimulation{i}.Constants{j} ' = ' num2str(simulations.Stimulation{i}.Values(j))])
+    if(~isempty(simulations.Constants{i}))
+      disp(' - Modified parameters:')
+      for j=1:length(simulations.Constants{i})
+        disp(['     ' simulations.Constants{i}{j} ' = ' num2str(simulations.Values{i}(j))])
+      end
     end
     previousSteps = 0;
     nextStim = 1;

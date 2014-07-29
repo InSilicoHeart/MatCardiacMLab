@@ -3,7 +3,7 @@
 %                                
 %
 %     [result,msg] = testCreateConfig001()         
-%                                                                                                                                                                                                  
+%
 %                                                                           
 %    Output:                                                                
 %      result: True if the file has been created. False in other case
@@ -50,7 +50,7 @@ try
   config = createConfiguration(Model,Constants,Values,DT,...
                         Stimulation,Time,sv_save,cv_save,...
                         'ResultFile',[path_save '/' Output],...
-						'ConfigFile',[path_save '/' ConfigFile]);
+                        'ConfigFile',[path_save '/' ConfigFile]);
 
   result = checkIfFileExists(path_save,ConfigFile);
   if(~result)

@@ -86,7 +86,7 @@ config.var2biomarker = var2biomarker;
 
 ConfigFile = [];
 
-if (module(length(varargin),2)>0)
+if (mod(length(varargin),2)>0)
   error('MatCardiacMLab:createConfigurationAPDRateAdaptation:InconsistentOptional',...
      ['Optional parameters must be in pairs'])
 end

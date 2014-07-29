@@ -93,7 +93,7 @@ config.cv_save = cv_save;
 
 ConfigFile = [];
 
-if (module(length(varargin),2)>0)
+if (mod(length(varargin),2)>0)
   error('MatCardiacMLab:createConfiguration:InconsistentOptional',...
      ['Optional parameters must be in pairs'])
 end

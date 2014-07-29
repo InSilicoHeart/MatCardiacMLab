@@ -32,7 +32,7 @@
 % www.usj.es  
 %
 
-function SV=MCMLSimulator(configuration,database)
+function [SV,result]=MCMLSimulator(configuration,database)
 
 disp(' ')
 tic

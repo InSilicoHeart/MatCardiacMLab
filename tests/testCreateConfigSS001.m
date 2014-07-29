@@ -40,7 +40,7 @@ end
 try
   config = createConfigurationSteadyState(Model,Constants,Values,DT,...
     CL,nCLs,sv_save,cv_save,nCLs_save,biomarkers,var2biomarker,...
-    [path_save '/' Output],[path_save '/' ConfigFile]);
+    'ResultFile',[path_save '/' Output],'ConfigFile',[path_save '/' ConfigFile]);
 
   result = checkIfFileExists(path_save,ConfigFile);
   if(~result)

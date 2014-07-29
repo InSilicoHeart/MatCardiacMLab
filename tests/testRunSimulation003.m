@@ -25,7 +25,7 @@ ConfigFile = ['testCreateConfig003_conf.mat'];
 delete([path_save '/' Output]);
 
 try
-  MCMLSimulator([path_save '/' ConfigFile]);
+  [SV0, result] = MCMLSimulator([path_save '/' ConfigFile]);
   file = dir(path_save);
   result = false;
   for i=1:length(file)

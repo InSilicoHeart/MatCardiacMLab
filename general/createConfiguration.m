@@ -106,7 +106,7 @@ for i=1:(length(varargin)/2)
       ConfigFile = varargin{2*i};
     else
       error('MatCardiacMLab:createConfiguration:NoDefinedOption',...
-         ['Option ' varargin{2*i-1} ' is not defined])
+         ['Option ' varargin{2*i-1} ' is not defined'])
     end
   end
 

@@ -5,8 +5,7 @@
 %
 %    config = createConfigurationAPDRateAdaptation(Model,...
 %                     Constants,Values,DT,CL1,nCLs1,CL2,nCLs2,...
-%                     sv_save,cv_save,nCLs_save,var2biomarker,Output[,...
-%                     ConfigFile])
+%                     sv_save,cv_save,nCLs_save,var2biomarker,optional)
 %
 %    Input:                                                                 
 %      Model:       MatCardiacMLab Model Structure or string with the 
@@ -28,9 +27,10 @@
 %      nCL_save:    Number of CL to save.
 %      var2biomarker: Variables used to calculate the fast and the slow 
 %                   time constants.
-%      Output:      Name of the file where the results are stored.
-%      ConfigFile:  Name of the file where the configuration has to be 
-%                   saved (Optional).
+%      optional:    Pairs of parameteres to indiate other options
+%          ResultFile:  Name of the file where the results are stored.
+%          ConfigFile:  Name of the file where the configuration has to
+%                       be saved (Optional).
 %                                                                           
 %    Output:  
 %      config: Structure with the configuration of the simulation.
@@ -38,6 +38,9 @@
 %    Throws:
 %      InconsistentConstants: Length of the Constants cell array is 
 %                   different from the length of Values
+%      InconsistentOptional: The optional configuration is composed by
+%                   and odd number of parameters.
+%      NoDefinedOption: The option is not defined
 %
 %-----------------------------------------------------------------------
 % 
@@ -59,7 +62,7 @@
 
 function config = createConfigurationAPDRateAdaptation(Model,...
                       Constants,Values,DT,CL1,nCLs1,CL2,nCLs2,...
-                      sv_save,cv_save,nCLs_save,var2biomarker,Output,...
+                      sv_save,cv_save,nCLs_save,var2biomarker,...
                       varargin)
 
 if(length(Constants)~=length(Values))
@@ -80,8 +83,29 @@ config.sv_save = sv_save;
 config.cv_save = cv_save;
 config.nCLs_save = nCLs_save;
 config.var2biomarker = var2biomarker;
-config.Output = Output;
 
-if (length(varargin)>0)
-  save(varargin{1},'-struct','config');
+ConfigFile = [];
+
+if (module(length(varargin),2)>0)
+  error('MatCardiacMLab:createConfigurationAPDRateAdaptation:InconsistentOptional',...
+     ['Optional parameters must be in pairs'])
 end
+
+for i=1:(length(varargin)/2)
+
+  if(strcmp(varargin{2*i-1},'ResultFile'))
+    config.ResultFile = varargin{2*i};
+  else if(strcmp(varargin{2*i-1},'ConfigFile'))
+      ConfigFile = varargin{2*i};
+    else
+      error('MatCardiacMLab:createConfigurationAPDRateAdaptation:NoDefinedOption',...
+         ['Option ' varargin{2*i-1} ' is not defined'])
+    end
+  end
+
+end
+
+if(~isempty(ConfigFile))
+  save(ConfigFile,'-struct','config');
+end
+ 

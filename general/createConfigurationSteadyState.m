@@ -4,7 +4,7 @@
 %
 %    config = createConfigurationSteadyState(Model,Constants,Values,...
 %                     DT,CL,nCLs,sv_save,cv_save,nCLs_save,...
-%                     biomarkers,var2biomarker,Output[,ConfigFile])
+%                     biomarkers,var2biomarker,optional)
 %
 %    Input:                                                                 
 %      Model:       MatCardiacMLab Model Structure or string with the 
@@ -28,9 +28,10 @@
 %                     - Diastolic
 %      var2biomarker: Variables used to calculate each one of the 
 %                   biomarkers.
-%      Output:      Name of the file where the results are stored.
-%      ConfigFile:  Name of the file where the configuration has to be 
-%                   saved (Optional).
+%      optional:    Pairs of parameteres to indiate other options
+%          ResultFile:  Name of the file where the results are stored.
+%          ConfigFile:  Name of the file where the configuration has to
+%                       be saved (Optional).
 %                                                                           
 %    Output:  
 %      config: Structure with the configuration of the simulation.
@@ -40,6 +41,9 @@
 %                   different from the length of Values
 %      InconsistentBiomarkers: Length of the biomarkers cell array is 
 %                   different from the length of var2biomarkers
+%      InconsistentOptional: The optional configuration is composed by
+%                   and odd number of parameters.
+%      NoDefinedOption: The option is not defined
 %
 %-----------------------------------------------------------------------
 % 
@@ -60,7 +64,7 @@
 %
 
 function config = createConfigurationSteadyState(Model,Constants,Values,DT,...
-    CL,nCLs,sv_save,cv_save,nCLs_save,biomarkers,var2biomarker,Output,varargin)
+    CL,nCLs,sv_save,cv_save,nCLs_save,biomarkers,var2biomarker,varargin)
 
 if(length(Constants)~=length(Values))
   error('MatCardiacMLab:createConfigurationSteadyState:InconsistentConstants',...
@@ -84,10 +88,27 @@ config.cv_save = cv_save;
 config.nCLs_save = nCLs_save;
 config.biomarkers = biomarkers;
 config.var2biomarker = var2biomarker;
-config.Output = Output;
 
-if (length(varargin)>0)
-  save(varargin{1},'-struct','config');
-%  disp(['Configuration saved at: ' varargin{1}])
+ConfigFile = [];
+
+if (module(length(varargin),2)>0)
+  error('MatCardiacMLab:createConfigurationSteadyState:InconsistentOptional',...
+     ['Optional parameters must be in pairs'])
 end
 
+for i=1:(length(varargin)/2)
+  if(strcmp(varargin{2*i-1},'ResultFile'))
+    config.ResultFile = varargin{2*i};
+  else if(strcmp(varargin{2*i-1},'ConfigFile'))
+      ConfigFile = varargin{2*i};
+    else
+      error('MatCardiacMLab:createConfigurationSteadyState:NoDefinedOption',...
+         ['Option ' varargin{2*i-1} ' is not defined'])
+    end
+  end
+end
+
+if(~isempty(ConfigFile))
+  save(ConfigFile,'-struct','config');
+end
+ 

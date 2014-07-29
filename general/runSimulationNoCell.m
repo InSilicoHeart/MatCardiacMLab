@@ -13,6 +13,7 @@
 %                                                                           
 %    Output:                                                                
 %      SV:            State variables at the end of the simulation     
+%      result:        Structure with the results of the simulation
 %
 %-----------------------------------------------------------------------
 % 
@@ -32,7 +33,7 @@
 % www.usj.es  
 %
 
-function SV0=runSimulationNoCell(configuration,model,options)
+function [SV0, result]=runSimulationNoCell(configuration,model,options)
 
 sv_save = getIndexToSave(configuration.sv_save,model,'SVNames');
 cv_save = getIndexToSave(configuration.cv_save,model,'CVNames');
@@ -127,5 +128,10 @@ SV{1}.resultUnits = model.SVUnits(sv_save);
 CV{1}.resultNames = model.CVNames(cv_save);
 CV{1}.resultUnits = model.CVUnits(cv_save);
 
+result.time = time;
+result.SV = SV;
+result.CV = CV;
 
-save(configuration.Output,'time','SV','CV')
+if(isfield('ResultFile'))
+  save(configuration.ResultFile,'-struct','result')
+end

@@ -101,8 +101,6 @@ end
 length(varargin)
 
 for i=1:(length(varargin)/2)
-varargin{2*i-1}
-varargin{2*i}
   if(strcmp(varargin{2*i-1},'ResultFile'))
     config.ResultFile = varargin{2*i};
   else if(strcmp(varargin{2*i-1},'ConfigFile'))

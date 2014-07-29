@@ -181,6 +181,6 @@ result.APD90 = APD90;
 result.tauSlow = tauSlow;
 result.tauFast = tauFast;
 
-if(isfield('ResultFile'))
+if(isfield(configuration,'ResultFile'))
   save(configuration.ResultFile,'-struct','result')
 end

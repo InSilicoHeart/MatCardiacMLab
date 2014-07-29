@@ -176,6 +176,6 @@ result.time = time;
 result.SV = SV;
 result.CV = CV;
 
-if(isfield('ResultFile'))
+if(isfield(configuration,'ResultFile'))
   save(configuration.ResultFile,'-struct','result')
 end

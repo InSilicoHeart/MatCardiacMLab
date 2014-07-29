@@ -3,7 +3,7 @@
 %            stimulations)
 %                                
 %
-%     SV=runSimulationNoCell(configuration,model,options)         
+%     [SV, result]=runSimulationNoCell(configuration,model,options)         
 %                                                                 
 %    Input:                                                                 
 %      configuration: Structure with a configuration created with the 
@@ -14,6 +14,7 @@
 %                                                                           
 %    Output:                                                                
 %      SV:            State variables at the end of the simulation     
+%      result:        Structure with the result of the simulation 
 %
 %-----------------------------------------------------------------------
 % 
@@ -33,7 +34,7 @@
 % www.usj.es  
 %
 
-function SV0=runSimulationCell(configuration,model,options)
+function [SV0, result]=runSimulationCell(configuration,model,options)
 
 
 % Find sv index in the model
@@ -171,4 +172,10 @@ for i=1:length(simulations.Stimulation)
 end
 
 
-save(configuration.Output,'time','SV','CV')
+result.time = time;
+result.SV = SV;
+result.CV = CV;
+
+if(isfield('ResultFile'))
+  save(configuration.ResultFile,'-struct','result')
+end

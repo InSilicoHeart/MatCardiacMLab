@@ -2,7 +2,7 @@
 %            using only one stimulation vector (no cell of stimulations)
 %                                
 %
-%     SV=runSimulationNoCell(configuration,model,options)         
+%     [SV, result]=runSimulationNoCell(configuration,model,options)         
 %                                                                 
 %    Input:                                                                 
 %      configuration: Structure with a configuration created with the 
@@ -34,6 +34,13 @@
 %
 
 function [SV0, result]=runSimulationNoCell(configuration,model,options)
+
+if(~isempty(configuration.Constants))
+  disp('Modified parameters:')
+  for i=1:length(configuration.Constants)
+    disp(['   ' configuration.Constants{i} ': ' num2str(configuration.Values(i))])
+  end
+end
 
 sv_save = getIndexToSave(configuration.sv_save,model,'SVNames');
 cv_save = getIndexToSave(configuration.cv_save,model,'CVNames');

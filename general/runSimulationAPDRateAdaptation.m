@@ -2,7 +2,7 @@
 %            protocol APDRateAdaptation
 %                                
 %
-%     SV = runSimulationAPDRateAdaptation(configuration,model,options)                                    
+%     [SV, result] = runSimulationAPDRateAdaptation(configuration,model,options)                                    
 %                                                                                                                                                                                                  
 %    Input:                                                                 
 %      configuration: Structure with a configuration created with the 
@@ -12,6 +12,7 @@
 %                                                                           
 %    Output:                                                                
 %      SV:            State variables at the end of the simulation     
+%      result:        Structure with the result of the simulation 
 %
 %-----------------------------------------------------------------------
 % 
@@ -31,7 +32,8 @@
 % www.usj.es  
 %
 
-function SV0=runSimulationAPDRateAdaptation(configuration,model,options)
+function [SV0,result] = runSimulationAPDRateAdaptation(...
+                              configuration, model, options)
 
 sv_save = getIndexToSave(configuration.sv_save,model,'SVNames');
 cv_save = getIndexToSave(configuration.cv_save,model,'CVNames');
@@ -172,4 +174,13 @@ for i=1:length(apd90_sv)
   tauFast{1}.resultUnits{i}= 's';
 end
 
-save(configuration.Output,'time','SV','CV','APD90','tauSlow','tauFast')
+result.time = time;
+result.SV = SV;
+result.CV = CV;
+result.APD90 = APD90;
+result.tauSlow = tauSlow;
+result.tauFast = tauFast;
+
+if(isfield('ResultFile'))
+  save(configuration.ResultFile,'-struct','result')
+end

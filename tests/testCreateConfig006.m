@@ -41,7 +41,7 @@ Time = 16000;
 sv_save = {{'V'},{'V'}};
 cv_save = {{},{'I_K_tot'}};
 path_save = ['testResults'];
-ConfigFile = ['testCreateConfig005_conf.mat'];
+ConfigFile = ['testCreateConfig006_conf.mat'];
 
 if(checkIfFileExists(path_save,ConfigFile))
   delete([path_save '/' ConfigFile]);

@@ -183,4 +183,5 @@ result.tauFast = tauFast;
 
 if(isfield(configuration,'ResultFile'))
   save(configuration.ResultFile,'-struct','result')
+  disp(['Result saved to ' configuration.ResultFile])
 end

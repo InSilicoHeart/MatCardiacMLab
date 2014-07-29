@@ -178,5 +178,5 @@ result.CV = CV;
 
 if(isfield(configuration,'ResultFile'))
   save(configuration.ResultFile,'-struct','result')
-  disp('Result saved')
+  disp(['Result saved to ' configuration.ResultFile])
 end

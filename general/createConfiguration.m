@@ -3,7 +3,7 @@
 %                                
 %
 %    config = createConfiguration(Model,Constants,Values,DT,Stimulation,
-%                              Time,sv_save,cv_save,Output[,ConfigFile]) 
+%                              Time,sv_save,cv_save,optional) 
 %                                                                                                                                               
 %    Input:                                                                 
 %      Model:       MatCardiacMLab Model Structure or string with the 
@@ -20,9 +20,10 @@
 %                   save.
 %      cv_save:     Cell array with the names of the Computed Variables
 %                   to save.
-%      Output:      Name of the file where the results are stored.
-%      ConfigFile:  Name of the file where the configuration has to be 
-%                   saved (Optional).
+%      optional:    Pairs of parameteres to indiate other options
+%          ResultFile:  Name of the file where the results are stored.
+%          ConfigFile:  Name of the file where the configuration has to
+%                       be saved (Optional).
 %        
 %   It's possible to define a sequence of simulations with different 
 %   parameters. To do this, put the vectors of Constants, Values, 
@@ -38,10 +39,11 @@
 %         TimeEnd = 20000; % Global simulation end.
 %         sv_save = {{'V'},{'V'}};
 %         cv_save = {{},{'I_NaK'}};
-%         Output = 'OutputFile.mat';
+%         ResultFile = 'OutputFile.mat';
 %         
 %         config = createConfiguration(Model,Constants,Values,DT,
-%                        Stimulation,Time,sv_save,cv_save,Output)
+%                        Stimulation,Time,sv_save,cv_save,'ResultFile',
+%                        ResultFile)
 %                                                                  
 %    Output:  
 %      config: Structure with the configuration of the simulation.
@@ -49,6 +51,9 @@
 %    Throws:
 %      InconsistentConstants: Length of the Constants cell array is 
 %                   different from the length of Values
+%      InconsistentOptional: The optional configuration is composed by
+%                   and odd number of parameters.
+%      NoDefinedOption: The option is not defined
 %
 %-----------------------------------------------------------------------
 % 
@@ -69,7 +74,7 @@
 %
 
 function config = createConfiguration(Model,Constants,Values,DT,...
-    Stimulation,TimeEnd,sv_save,cv_save,Output,varargin)
+    Stimulation,TimeEnd,sv_save,cv_save,varargin)
 
 if(length(Constants)~=length(Values))
   error('MatCardiacMLab:createConfiguration:InconsistentConstants',...
@@ -83,10 +88,31 @@ config.Values = Values;
 config.DT = DT;
 config.Stimulation = Stimulation;
 config.TimeEnd = TimeEnd;
-config.Output = Output;
 config.sv_save = sv_save;
 config.cv_save = cv_save;
 
-if (length(varargin)>0)
-  save(varargin{1},'-struct','config');
+ConfigFile = [];
+
+if (module(length(varargin),2)>0)
+  error('MatCardiacMLab:createConfiguration:InconsistentOptional',...
+     ['Optional parameters must be in pairs'])
 end
+
+for i=1:(length(varargin)/2)
+
+  if(strcmp(varargin{2*i-1},'ResultFile'))
+    config.ResultFile = varargin{2*i};
+  else if(strcmp(varargin{2*i-1},'ConfigFile'))
+      ConfigFile = varargin{2*i};
+    else
+      error('MatCardiacMLab:createConfiguration:NoDefinedOption',...
+         ['Option ' varargin{2*i-1} ' is not defined])
+    end
+  end
+
+end
+
+if(~isempty(ConfigFile))
+  save(ConfigFile,'-struct','config');
+end
+ 

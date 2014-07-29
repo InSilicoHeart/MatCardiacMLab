@@ -137,10 +137,3 @@ result.APD90 = APD90;
 result.Triangulation = Triangulation;
 result.Diastolic = Diastolic;
 result.Systolic = Systolic;
-
-if(isfield(configuration,'ResultFile'))
-  save(configuration.ResultFile,'-struct','result')
-  disp(['Result saved to ' configuration.ResultFile])
-end
-
-

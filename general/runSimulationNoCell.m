@@ -138,9 +138,3 @@ CV{1}.resultUnits = model.CVUnits(cv_save);
 result.time = time;
 result.SV = SV;
 result.CV = CV;
-
-if(isfield(configuration,'ResultFile'))
-  save(configuration.ResultFile,'-struct','result')
-  disp(['Result saved to ' configuration.ResultFile])
-end
-

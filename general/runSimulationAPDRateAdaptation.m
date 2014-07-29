@@ -180,8 +180,3 @@ result.CV = CV;
 result.APD90 = APD90;
 result.tauSlow = tauSlow;
 result.tauFast = tauFast;
-
-if(isfield(configuration,'ResultFile'))
-  save(configuration.ResultFile,'-struct','result')
-  disp(['Result saved to ' configuration.ResultFile])
-end

@@ -84,6 +84,11 @@ else if(iscell(configuration.Stimulation))
     end
 end
 
+if(isfield(configuration,'ResultFile'))
+  save(configuration.ResultFile,'-struct','result')
+  disp(['Result saved to ' configuration.ResultFile])
+end
+
 toc
 disp(' ')
 disp(' ')

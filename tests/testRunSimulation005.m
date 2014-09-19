@@ -24,8 +24,8 @@ ConfigFile = ['testCreateConfig005_conf.mat'];
 
 delete([path_save '/' Output]);
 
-%try
-  MCMLSimulator([path_save '/' ConfigFile]);
+try
+  [SV0, result] = MCMLSimulator([path_save '/' ConfigFile]);
   file = dir(path_save);
   result = false;
   for i=1:length(file)
@@ -40,11 +40,11 @@ delete([path_save '/' Output]);
     return;
   end
 
-%catch ME
-%  result = false;
-%  msg = ME.message;
-%  return;
-%end
+catch ME
+  result = false;
+  msg = ME.message;
+  return;
+end
 
 msg = ['Computed file ' ConfigFile];
 

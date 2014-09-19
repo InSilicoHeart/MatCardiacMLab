@@ -16,27 +16,27 @@
 % San Jorge University 
 % www.usj.es  
 %
-function [result,msg] = testRunSimulationSS001()
+function [result,msg] = testRunSimulation006()
 
 path_save = 'testResults';
-Output = ['testCreateConfigSS001_res.mat'];
-ConfigFile = ['testCreateConfigSS001_conf.mat'];
+Output = ['testCreateConfig006_res.mat'];
+ConfigFile = ['testCreateConfig006_conf.mat'];
 
 delete([path_save '/' Output]);
 
 try
   [SV0, result] = MCMLSimulator([path_save '/' ConfigFile]);
   file = dir(path_save);
-  result = false;
+  result = true;
   for i=1:length(file)
     if(strcmp(file(i).name,Output))
-      result = true;
+      result = false;
       break
     end
   end
 
   if(~result)
-    msg = 'Computation output not found';
+    msg = 'Computation output found';
     return;
   end
 

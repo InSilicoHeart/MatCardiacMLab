@@ -1,6 +1,7 @@
-%% testCreateConfig005 - Creates a new configuration to test a simple
+%% testCreateConfig006 - Creates a new configuration to test a simple
 %            cell configuration with sv and cv to save and constant
-%            modification
+%            modification. This configuration doesn't indicates ouput
+%            file
 %                                
 %
 %     [result,msg] = testCreateConfig005() 
@@ -40,8 +41,7 @@ Time = 16000;
 sv_save = {{'V'},{'V'}};
 cv_save = {{},{'I_K_tot'}};
 path_save = ['testResults'];
-Output = ['testCreateConfig005_res.mat'];
-ConfigFile = ['testCreateConfig005_conf.mat'];
+ConfigFile = ['testCreateConfig006_conf.mat'];
 
 if(checkIfFileExists(path_save,ConfigFile))
   delete([path_save '/' ConfigFile]);
@@ -50,7 +50,6 @@ end
 try
   config = createConfiguration(Model,Constants,Values,DT,...
                         Stimulation,Time,sv_save,cv_save,...
-                        'ResultFile',[path_save '/' Output],...
 			'ConfigFile',[path_save '/' ConfigFile]);
 
   result = checkIfFileExists(path_save,ConfigFile);

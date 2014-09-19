@@ -2,7 +2,7 @@
 %            using only one stimulation vector (no cell of stimulations)
 %                                
 %
-%     SV=runSimulationNoCell(configuration,model,options)         
+%     [SV, result]=runSimulationNoCell(configuration,model,options)         
 %                                                                 
 %    Input:                                                                 
 %      configuration: Structure with a configuration created with the 
@@ -13,6 +13,7 @@
 %                                                                           
 %    Output:                                                                
 %      SV:            State variables at the end of the simulation     
+%      result:        Structure with the results of the simulation
 %
 %-----------------------------------------------------------------------
 % 
@@ -32,7 +33,14 @@
 % www.usj.es  
 %
 
-function SV0=runSimulationNoCell(configuration,model,options)
+function [SV0, result]=runSimulationNoCell(configuration,model,options)
+
+if(~isempty(configuration.Constants))
+  disp('Modified parameters:')
+  for i=1:length(configuration.Constants)
+    disp(['   ' configuration.Constants{i} ': ' num2str(configuration.Values(i))])
+  end
+end
 
 sv_save = getIndexToSave(configuration.sv_save,model,'SVNames');
 cv_save = getIndexToSave(configuration.cv_save,model,'CVNames');
@@ -127,5 +135,6 @@ SV{1}.resultUnits = model.SVUnits(sv_save);
 CV{1}.resultNames = model.CVNames(cv_save);
 CV{1}.resultUnits = model.CVUnits(cv_save);
 
-
-save(configuration.Output,'time','SV','CV')
+result.time = time;
+result.SV = SV;
+result.CV = CV;

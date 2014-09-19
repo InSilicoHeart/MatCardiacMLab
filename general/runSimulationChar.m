@@ -1,7 +1,7 @@
 %% runSimulationChar - Runs simulations for the predefined protocols
 %                                
 %
-%     SV = runSimulationChar(configuration,model,options)                                    
+%     [SV, result] = runSimulationChar(configuration,model,options)                                    
 %                                                                                                                                                                                                  
 %    Input:                                                                 
 %      configuration: Structure with a configuration created with the 
@@ -13,6 +13,7 @@
 %                                                                           
 %    Output:                                                                
 %      SV:            State variables at the end of the simulation     
+%      result:        Structure with the result of the simulation 
 %
 %-----------------------------------------------------------------------
 % 
@@ -32,7 +33,7 @@
 % www.usj.es  
 %
 
-function SV=runSimulationChar(configuration,model,options)
+function [SV, result]=runSimulationChar(configuration,model,options)
 
 disp(['Protocol: ' configuration.Stimulation])
 if(~isempty(configuration.Constants))
@@ -43,14 +44,15 @@ if(~isempty(configuration.Constants))
 end
   
 if(strcmp(configuration.Stimulation,'SteadyState'))
-    SV=runSimulationSteadyState(configuration,model,options);
+    [SV, result]=runSimulationSteadyState(configuration,model,options);
     return;
 end
 
 if(strcmp(configuration.Stimulation,'APDRateAdaptation'))
-    SV=runSimulationAPDRateAdaptation(configuration,model,options);
+    [SV, result]=runSimulationAPDRateAdaptation(configuration,model,options);
     return;
 end
 
 disp(['Protocol ' configuration.Stimulation ' not implemented yet.'])
 SV=[];
+result=[];

@@ -2,7 +2,7 @@
 %            protocol SteadyState
 %                                
 %
-%     SV = runSimulationSteadyState(configuration,model,options)                                    
+%     [SV, result] = runSimulationSteadyState(configuration,model,options)                                    
 %                                                                                                                                                                                                  
 %    Input:                                                                 
 %      configuration: Structure with a configuration created with the 
@@ -12,6 +12,7 @@
 %                                                                           
 %    Output:                                                                
 %      SV:            State variables at the end of the simulation     
+%      result:        Structure with the result of the simulation 
 %
 %-----------------------------------------------------------------------
 % 
@@ -31,7 +32,7 @@
 % www.usj.es  
 %
 
-function SV0=runSimulationSteadyState(configuration,model,options)
+function [SV0, result]=runSimulationSteadyState(configuration,model,options)
 
 sv_save = getIndexToSave(configuration.sv_save,model,'SVNames');
 cv_save = getIndexToSave(configuration.cv_save,model,'CVNames');
@@ -129,4 +130,10 @@ Diastolic{1}.resultNames = model.SVNames(dia_sv);
 Systolic{1}.result = sys;
 Systolic{1}.resultNames = model.SVNames(sys_sv);
                                    
-save(configuration.Output,'time','SV','CV','APD90','Triangulation','Diastolic','Systolic')
+result.time = time;
+result.SV = SV;
+result.CV = CV;
+result.APD90 = APD90;
+result.Triangulation = Triangulation;
+result.Diastolic = Diastolic;
+result.Systolic = Systolic;
